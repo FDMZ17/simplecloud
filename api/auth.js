@@ -1,16 +1,46 @@
 const bodyParser = require('body-parser');
+const config = require("../config.js");
 
-module.exports.load = async function(app) {
+module.exports.load = async function(app, db) {
   app.post('/api/auth/login', bodyParser.urlencoded(), (req, res, next) => {
-    if (req.body.name == 'FDMZ17' && req.body.pw == '1234567890') {
+    if(!req.body.name) {
+      res.redirect("/login");
+    }
+    let dbName = db.get(req.body.name);
+    if(!dbName) {
+      res.redirect("/login");     
+    }
+    if (req.body.pw == dbName.pw) {
       res.locals.name = req.body.name;
       next();
     } else
-      res.sendStatus(401);
+      res.redirect("/login")
   }, (req, res) => {
     req.session.loggedIn = true
     req.session.name = res.locals.name
     console.log(req.session.name);
     res.redirect('/dash');
+  });
+
+  app.post("/api/auth/register", bodyParser.urlencoded(), (req, res) => {
+    if (req.body.regKey != config.REGISTER_KEY) {
+      return res.redirect("/register");
+    }
+    if (!req.body.name) {
+      return res.redirect("/register");
+    }
+    if (!req.body.pw) {
+      return res.redirect("/register");
+    }
+    let name = req.body.name;
+    let pw = req.body.pw;
+    console.log("New user request: " + name);
+    db.set(name, {
+      name: name,
+      pw: pw
+    });
+    req.session.loggedIn = true;
+    req.session.name = name
+    res.redirect("/dash");
   });
 }
