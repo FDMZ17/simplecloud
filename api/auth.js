@@ -3,12 +3,12 @@ const config = require("../config.js");
 
 module.exports.load = async function(app, db) {
   app.post('/api/auth/login', bodyParser.urlencoded(), async (req, res, next) => {
-    if(!req.body.name) {
+    if (!req.body.name) {
       res.redirect("/login");
     }
     let dbName = await db.get(req.body.name);
-    if(!dbName) {
-      res.redirect("/login");     
+    if (!dbName) {
+      res.redirect("/login");
     }
     if (req.body.pw == dbName.pw) {
       res.locals.name = req.body.name;
@@ -18,11 +18,10 @@ module.exports.load = async function(app, db) {
   }, (req, res) => {
     req.session.loggedIn = true
     req.session.name = res.locals.name
-    console.log(req.session.name);
     res.redirect('/dash');
   });
 
-  app.post("/api/auth/register", bodyParser.urlencoded(), (req, res) => {
+  app.post("/api/auth/register", bodyParser.urlencoded(), async (req, res) => {
     if (req.body.regKey != config.REGISTER_KEY) {
       return res.redirect("/register");
     }
@@ -32,15 +31,29 @@ module.exports.load = async function(app, db) {
     if (!req.body.pw) {
       return res.redirect("/register");
     }
+
     let name = req.body.name;
     let pw = req.body.pw;
-    console.log("New user request: " + name);
-    db.set(name, {
-      name: name,
-      pw: pw
-    });
-    req.session.loggedIn = true;
-    req.session.name = name
-    res.redirect("/dash");
+    let checkName = await db.get(req.body.name);
+    if (req.body.name != checkName.name) {
+      db.set(name, {
+        name: name,
+        pw: pw
+      });
+      req.session.loggedIn = true;
+      req.session.name = name
+      res.redirect("/dash");
+    } else {
+      res.redirect("/login")
+    }
+  });
+
+  app.get('/logout', async (req, res) => {
+    if (req.session.loggedIn) {
+      delete req.session.loggedIn;
+      res.redirect("/")
+    } else {
+      res.redirect("/login");
+    }
   });
 }
