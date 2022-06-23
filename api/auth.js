@@ -2,11 +2,11 @@ const bodyParser = require('body-parser');
 const config = require("../config.js");
 
 module.exports.load = async function(app, db) {
-  app.post('/api/auth/login', bodyParser.urlencoded(), (req, res, next) => {
+  app.post('/api/auth/login', bodyParser.urlencoded(), async (req, res, next) => {
     if(!req.body.name) {
       res.redirect("/login");
     }
-    let dbName = db.get(req.body.name);
+    let dbName = await db.get(req.body.name);
     if(!dbName) {
       res.redirect("/login");     
     }

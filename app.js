@@ -1,7 +1,8 @@
 const express = require("express");
 const session = require('express-session');
 const app = express();
-const db = require('quick.db');
+const { QuickDB } = require('quick.db');
+const db = new QuickDB();
 const config = require("./config.js");
 const fs = require("fs");
 
