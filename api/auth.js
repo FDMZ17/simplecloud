@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 
 module.exports.load = async function(app) {
   app.post('/api/auth/login', bodyParser.urlencoded(), (req, res, next) => {
-    if (req.body.name == 'foo' && req.body.pw == 'bar') {
+    if (req.body.name == 'FDMZ17' && req.body.pw == '1234567890') {
       res.locals.name = req.body.name;
       next();
     } else

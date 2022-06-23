@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<title>Register</title>
-  </head>
-  <body>
-	<form action="/api/register" method="POST">
-  	<!-- user input-->
-  	Username:<br>
-  	<input type="text" name="name" placeholder="Username" required><br><br>
-  	Password:<br>
-  	<input type="password" name="pw" placeholder="Password" required><br><br>
-    Invite code:<br>
-    <input type="password" name="pw" placeholder="Password" required><br><br>
-  	<!-- submit button -->
-  	<input type="submit" value="login">
-	</form>
-  </body>
-</html>
+<html lang="en">
 
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Register</title>
+	<link href="/elements/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="max-w-md p-5 mx-auto bg-white rounded shadow-sm">
+		<h2 class="px-4 text-4xl">Register</h2>
+		<form class="mt-10 space-y-8" action="/api/auth/register" method="POST">
+			<input class="w-full h-12 px-4 border rounded focus:outline-none" name="name" placeholder="Username"
+				type="text" required />
+			<input class="w-full h-12 px-4 border rounded focus:outline-none -mr-7" name="pw" placeholder="Password"
+				type="password" required />
+			<input class="w-full h-12 px-4 border rounded focus:outline-none" name="regKey" placeholder="Register key"
+				type="password" required />
+			<div>
+				<div class="flex flex-col justify-between md:flex-row md:items-center">
+					<input
+						class="px-4 py-2 text-sm text-white uppercase bg-orange-500 rounded cursor-pointer active:bg-gray-700 font-regular"
+						type="submit" value="Register!" />
+					<a class="self-center mt-4 text-sm text-gray-400 underline md:self-auto md:mt-0" href="/login">
+						Alredy have an account? Login
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

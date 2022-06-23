@@ -7,8 +7,6 @@ const fs = require("fs");
 
 app.use(express.static(__dirname + "/public"));
 
-app.use(express.static(__dirname + "/assets"));
-
 app.use(session({
   name: "authToken",
   secret: "MySuperSecreetAuthToken",
@@ -20,9 +18,7 @@ let apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
 apiFiles.forEach(file => {
   let apiFile = require(`./api/${file}`);
   apiFile.load(app, db);
-  console.log(" =======================");
   console.log("| Loaded api: " + file + " |");
-  console.log(" =======================");
 });
 
 
