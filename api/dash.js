@@ -6,6 +6,7 @@ module.exports.load = async function(app) {
       <h2>Here is your secreet token: <h3>${req.session.token}</h3></h2>
       <br>
       <p class="text-sm">The dashboard is comming soon!</p>
+      <a href="/logout">Logout</a>
       `);
       res.end();
     } else {
