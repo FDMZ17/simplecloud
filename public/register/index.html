@@ -9,21 +9,24 @@
 	<link href="/elements/style.css" rel="stylesheet" />
 </head>
 
-<body>
-	<div class="max-w-md p-5 mx-auto bg-white rounded shadow-sm">
-		<h2 class="px-4 text-4xl">Register</h2>
+<body class="bg-neutral-800">
+	<div class="mt-16 max-w-md p-5 mx-auto rounded shadow-sm">
+		<h2 class="px-4 text-4xl text-white text-center">Register</h2>
 		<form class="mt-10 space-y-8" action="/api/auth/register" method="POST">
-			<input class="w-full h-12 px-4 border rounded focus:outline-none" name="name" placeholder="Username"
-				type="text" required />
-			<input class="w-full h-12 px-4 border rounded focus:outline-none -mr-7" name="pw" placeholder="Password"
-				type="password" required />
-			<input class="w-full h-12 px-4 border rounded focus:outline-none" name="regKey" placeholder="Register key"
-				type="password" required />
+			<input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-stone-900 text-neutral-300" name="name" placeholder="Username"
+				type="text" minlength="2" maxlength="16" required />
+
+			<div class="flex items-center">
+				<input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-stone-900 text-neutral-300" name="pw" placeholder="Password"
+					type="password" minlength="8" maxlength="64" required />
+			</div>
+        <input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-stone-900 text-neutral-300" name="regKey" placeholder="Register key"
+					type="password" required />
 			<div>
 				<div class="flex flex-col justify-between md:flex-row md:items-center">
 					<input
 						class="px-4 py-2 text-sm text-white uppercase bg-orange-500 rounded cursor-pointer active:bg-gray-700 font-regular"
-						type="submit" value="Register!" />
+						type="submit" value="login now" />
 					<a class="self-center mt-4 text-sm text-gray-400 underline md:self-auto md:mt-0" href="/login">
 						Alredy have an account? Login
 					</a>

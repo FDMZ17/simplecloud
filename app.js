@@ -8,11 +8,14 @@ const fs = require("fs");
 
 app.use(express.static(__dirname + "/public"));
 
+app.set('trust proxy', 1);
+
 app.use(session({
   name: "authToken",
   secret: "MySuperSecreetAuthToken",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  maxAge: 120000
 }));
 
 let apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
