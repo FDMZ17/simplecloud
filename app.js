@@ -1,14 +1,20 @@
 const express = require("express");
 const session = require('express-session');
 const app = express();
-const { QuickDB } = require('quick.db');
+const {
+  QuickDB
+} = require('quick.db');
 const db = new QuickDB();
 const config = require("./config.js");
 const fs = require("fs");
+const fileUpload = require("express-fileupload");
 
 app.use(express.static(__dirname + "/public"));
 
-app.set('trust proxy', 1);
+app.use(
+  fileUpload()
+);
+app.use("/", express.static('usercontent/'));
 
 app.use(session({
   name: "authToken",
@@ -25,6 +31,10 @@ apiFiles.forEach(file => {
   console.log("| Loaded api: " + file + " |");
 });
 
+if (!fs.existsSync("usercontent")) {
+  fs.mkdirSync("usercontent");
+  console.log("Creating usercontent directory");
+}
 
 app.listen(config.WEB_PORT);
 console.log("Running on port " + config.WEB_PORT);

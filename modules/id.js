@@ -1,7 +1,7 @@
 const slugify = require("./slugify.js");
 const config = require("../config.js");
 
-function generate(length) {
+function gen(length) {
   let result = [];
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -10,18 +10,4 @@ function generate(length) {
       charactersLength)));
   }
   return result.join('');
-}
-
-function validate(id, override) {
-  if (override) {
-    return id;
-  }
-
-  id = slugify(id);
-
-  if (id.length > config.ID_MIN && id.length < config.ID_MAX) {
-    return id;
-  } else {
-    throw ("ID is not valid.");
-  }
 }

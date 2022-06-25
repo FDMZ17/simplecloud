@@ -17,16 +17,13 @@ module.exports.load = async function(app) {
 	<div class="mt-16 max-w-2xl p-5 mx-auto rounded shadow-sm">
     <h2 class="px-4 text-4xl text-white text-center">Simple cloud dashboard</h2>
     <p class="px-4 text-xl text-white text-center mt-12">Welcome back ${req.session.name}</p>
-    <p id="token" class="px-4 text-lg text-white items-center mt-5 invisible">Your upload token: ${req.session.token}</p>
-    <div class="flex justify-center items-center mt-8">
-      <button onclick="showToken()" class="text-base font-semi-bold text-red-600 rounded-full border-red-600 border-2 px-4 py-2">Token!</button>
-    </div>
     <div class="flex flex-wrap items-center justify-center mt-16">
-      <a href="/logout" class="text-xl text-white text-center hover:underline mr-5">Logout</a>
-      <a href="/files" class="text-xl text-white text-center hover:underline ml-5">Files</a>
+      <a href="/logout" class="text-xl text-white text-center hover:bg-neutral-800 hover:text-red-500 border-2 border-red-500 mr-5 rounded-lg bg-red-500 py-2 px-4">Logout</a>
+      <a href="/files" class="text-xl text-white text-center border-2 border-green-500 hover:text-green hover:text-green-500 hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-green-500 py-2 px-4">Files</a>
+      <a href="/upload" class="text-xl text-white text-center ml-5 border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-sky-500 py-2 px-4">Upload</a>
+
     </div>
   </div>
-  <script src="/elements/dash.js"></script>
 </body>
 </html>
       `);
