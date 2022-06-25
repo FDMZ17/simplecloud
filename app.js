@@ -9,11 +9,17 @@ const config = require("./config.js");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 
+// app.use(fileUpload());
+
 app.use(express.static(__dirname + "/public"));
 
-app.use(
-  fileUpload()
-);
+ app.use(fileUpload({
+    limits: {
+        fileSize: 1024 * 1024 * config.MAX_SIZE
+    },
+   abortOnLimit: true
+ }));
+
 app.use("/", express.static('usercontent/'));
 
 app.use(session({
@@ -37,4 +43,5 @@ if (!fs.existsSync("usercontent")) {
 }
 
 app.listen(config.WEB_PORT);
-console.log("Running on port " + config.WEB_PORT);
+console.log("Running on: " + config.WEB_URL);
+
