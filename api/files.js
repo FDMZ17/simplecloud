@@ -22,15 +22,15 @@ module.exports.load = async function(app) {
       <h3 class="font-semibold text-xl text-white mb-3">Your file:</h3>
       <ul class="text-slate-300">
       <li>
-      <a class="inline-block text-base hover:text-primary mb-3" href="#home">File1</a>
+      <a class="inline-block text-base hover:text-primary mb-3" href="#">File1</a>
       </li>
-      <a class="inline-block text-base hover:text-primary mb-3" href="#about">File2</a>
+      <a class="inline-block text-base hover:text-primary mb-3" href="#">File2</a>
       <li>
-      <a class="inline-block text-base hover:text-primary mb-3" href="#portfolio">File3</a>
+      <a class="inline-block text-base hover:text-primary mb-3" href="#">File3</a>
       </li>
-      <a class="inline-block text-base hover:text-primary mb-3" href="#tech">File4</a>
+      <a class="inline-block text-base hover:text-primary mb-3" href="#">File4</a>
       <li>
-      <a class="inline-block text-base hover:text-primary mb-3" href="#contact">File5</a>
+      <a class="inline-block text-base hover:text-primary mb-3" href="#">File5</a>
       </li>
       </ul>
     </div>
