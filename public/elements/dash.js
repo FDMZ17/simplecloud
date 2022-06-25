@@ -1,6 +1,6 @@
-const showToken = document.querySelector("#showToken");
-const viewToken = document.querySelector("#viewToken");
+const token = document.querySelector("#token");
+const tokenBtn = document.querySelector("#tokenBtn");
 
-showToken.addEventListener("click", function() {
-  viewToken.clasList.toggle("invisible");
-});
+function showToken() {
+  token.classList.toggle("invisible");
+}
