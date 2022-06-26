@@ -1,13 +1,13 @@
 const config = require("../config.js");
 
-module.exports.load = async function(app, db) {
+module.exports.load = async function(app, db, dirls) {
   app.get("/:id", async (req, res) => {
-    let dbChk = await db.get(`globalTable`);
-    if (dbChk) {
-      if (!dbChk.includes(req.path)) {
-        return res.status(404).send("<h1>404 Error!</h1>")
-      }
-      res.send(`
+    let fileChk = dirls();
+    let fileID = req.path.replace("/", "");
+    if (!fileChk.includes(fileID)) {
+      return res.sendStatus(404)
+    }
+    res.send(`
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +39,6 @@ module.exports.load = async function(app, db) {
   </div>
 </body>
 </html>`);
-      res.end();
-    }
+    res.end();
   });
 }

@@ -74,7 +74,6 @@ module.exports.load = async function(app, db) {
       }
       return res.redirect(fileURL);
     });
-    let dbFID = "/" + fID;
     db.push(`${req.session.name}.files`, fID);
-    db.push(`globalTable`, dbFID);  });
+  });
 }
