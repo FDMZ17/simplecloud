@@ -20,7 +20,7 @@ app.use(express.static(__dirname + "/public"));
    abortOnLimit: true
  }));
 
-app.use("/", express.static('usercontent/'));
+app.use("/usercontent/", express.static('usercontent/'));
 
 app.use(session({
   name: "authToken",

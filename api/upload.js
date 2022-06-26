@@ -1,6 +1,5 @@
 const config = require("../config.js");
 const path = require("path");
-const fs = require("fs");
 
 module.exports.load = async function(app, db) {
   app.get("/upload", async (req, res) => {
@@ -74,7 +73,7 @@ module.exports.load = async function(app, db) {
       }
       return res.redirect(fileURL);
     });
-
+    let dbFID = "/" + fID;
     db.push(`${req.session.name}.files`, fID);
-  });
+    db.push(`globalTable`, dbFID);  });
 }
