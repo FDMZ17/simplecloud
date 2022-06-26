@@ -1,3 +1,5 @@
+const config = require("../config.js");
+
 module.exports.load = async function(app, db) {
   app.get("/:id", async (req, res) => {
     let dbChk = await db.get(`globalTable`);
@@ -12,7 +14,14 @@ module.exports.load = async function(app, db) {
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, minimum-scale=0.1">
+  <meta property="og:url" content="${config.WEB_URL}${req.path}">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#547C97">
+  <meta name="description" content="${req.path}">
+  <meta property="og:title" content="A file has appeared">
+  <meta property="og:image" content="${config.WEB_URL}/usercontent${req.path}">
+  <meta property="og:image:type" content="image/png" />
 	<title>File preview | Simple cloud</title>
 	<link href="/elements/style.css" rel="stylesheet" />
 </head>
