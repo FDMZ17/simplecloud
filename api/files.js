@@ -6,12 +6,13 @@ module.exports.load = async function(app, db) {
       let dbList = await db.get(`${req.session.name}.files`);
       let i = 0;
       let listFile = [];
-      while (i < dbList.length) {
-        listFile.push(`<li> <a class="inline-block text-base hover:text-primary mb-3" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> </li>`);
-        i++;
-      }
+      if (dbList) {
+        while (i < dbList.length) {
+          listFile.push(`<li> <a class="inline-block text-base hover:text-primary mb-3" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> </li>`);
+          i++;
+        }
 
-      res.send(`
+        res.send(`
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +37,10 @@ module.exports.load = async function(app, db) {
   </div>
 </body>
 </html>`);
-      res.end();
+        res.end();
+      } else {
+        res.redirect("/upload");
+      }
     } else {
       res.redirect("/login");
     }
