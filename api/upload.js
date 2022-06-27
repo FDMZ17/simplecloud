@@ -56,7 +56,7 @@ module.exports.load = async function(app, db) {
     if (!req.session.loggedIn) {
       return res.redirect("/login");
     }
-    if (req.files == 0) {
+    if (res.files == 0) {
       return res.redirect("/upload");
     }
     const file = req.files.file;

@@ -8,7 +8,11 @@ module.exports.load = async function(app, db) {
       let listFile = [];
       if (dbList) {
         while (i < dbList.length) {
-          listFile.push(`<li> <a class="inline-block text-base hover:text-primary mb-3" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> </li>`);
+          listFile.push(`<li> 
+            <a class="inline-block text-md hover:text-primary mb-3 mt-8" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> 
+            <a href="${config.WEB_URL}/${dbList[i]}" class="text-md text-white text-center ml-5 border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 mt-8 rounded-lg bg-sky-500 py-2 px-4">View</a>
+            <a href="${config.WEB_URL}/delete/${dbList[i]}" class="text-md text-white text-center ml-5 border-2 border-red-500 hover:text-red-500 hover:text-red hover:bg-neutral-800 mt-8 rounded-lg bg-red-500 py-2 px-4">Delete</a>
+          </li>`);
           i++;
         }
 
