@@ -56,7 +56,7 @@ module.exports.load = async function(app, db) {
     if (!req.session.loggedIn) {
       return res.redirect("/login");
     }
-    if (res.files == 0) {
+    if (req.files == 0) {
       return res.redirect("/upload");
     }
     const file = req.files.file;
@@ -75,5 +75,33 @@ module.exports.load = async function(app, db) {
       return res.redirect(fileURL);
     });
     db.push(`${req.session.name}.files`, fID);
+  });
+
+  app.post("/upload/curl", async (req, res) => {
+      if (res.files == 0) {
+        return res.send("Please attach a file");
+      }
+      if(!req.body.name) {
+        return res.sendStatus(401);
+      }
+      if(!req.body.token) {
+        return res.sendStatus(401);
+      }
+      const file = req.files.file;
+      const fileExt = path.extname(file.name);
+      if (config.FILE_EXTENTION_CHECK) {
+        if (!config.ALLOWED_EXTENTION.includes(fileExt)) {
+          return res.status(422).send("Files with this extension are not allowed");
+        }
+      }
+      let fID = genID(config.ID_LENGTH) + fileExt;
+      let fileURL = config.WEB_URL + "/" + fID;
+      file.mv(`usercontent/${fID}`, (err) => {
+        if (err) {
+          return res.status(500);
+        }
+        return res.send(`${fileURL}\n`);
+      });
+      db.push(`${req.body.name}.files`, fID)
   });
 }

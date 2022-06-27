@@ -21,6 +21,7 @@ module.exports.load = async function(app, db) {
         res.locals.name = req.body.name;
         req.session.loggedIn = true;
         req.session.name = res.locals.name;
+        req.session.token = dbName.token;
         res.redirect('/dash');
       } else {
         res.redirect("/login");
@@ -45,10 +46,15 @@ module.exports.load = async function(app, db) {
     saltHash.update(req.body.pw);
     let pwHash = saltHash.digest('hex');
     let checkName = await db.get(req.body.name);
+    let saltToken = crypto.createHmac('sha256', config.TOKEN_SALT);
+    let registerTime = Date.now();
+    saltToken.update(toString(registerTime));
+    let token = saltToken.digest('hex');
     if (!checkName) {
       db.set(name, {
         name: name,
-        pw: pwHash
+        pw: pwHash,
+        token: token
       });
       req.session.loggedIn = true;
       req.session.name = name;
