@@ -35,7 +35,7 @@ module.exports.load = async function(app, db) {
     <div class="w-full">
       <h3 class="font-semibold text-xl text-white mb-3 text-center mt-8">Your file:</h3>
       <ul class="text-slate-300 text-center">
-      ${listFile.join("")}
+      ${listFile.reverse().join("")}
       </ul>
     </div>
   </div>
