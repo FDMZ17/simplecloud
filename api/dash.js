@@ -17,13 +17,16 @@ module.exports.load = async function(app) {
 	<div class="mt-16 max-w-2xl p-5 mx-auto rounded shadow-sm">
     <h2 class="px-4 text-4xl text-white text-center">Simple cloud dashboard</h2>
     <p class="px-4 text-xl text-white text-center mt-12">Welcome back ${req.session.name}</p>
-    <div class="flex flex-wrap items-center justify-center mt-16">
-      <a href="/logout" class="text-xl text-white text-center hover:bg-neutral-800 hover:text-red-500 border-2 border-red-500 mr-5 rounded-lg bg-red-500 py-2 px-4">Logout</a>
-      <a href="/files" class="text-xl text-white text-center border-2 border-green-500 hover:text-green hover:text-green-500 hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-green-500 py-2 px-4">Files</a>
-      <a href="/upload" class="text-xl text-white text-center ml-5 border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-sky-500 py-2 px-4">Upload</a>
-      <a href="/cli" class="text-xl text-white text-center ml-5 border-2 border-yellow-500 hover:text-yellow-500 hover:text-yellow hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-yellow-500 py-2 px-4">CLI</a>
-
+    <div class="flex flex-wrap items-center justify-center mr-16">
+    <div class="flex flex-wrap items-center justify-center mt-6 md:mr-8">
+      <a href="/logout" class="text-xl text-white text-center hover:bg-neutral-800 hover:text-red-500 border-2 border-red-500 mr-4 rounded-lg bg-red-500 py-2 px-4 sm:ml-2">Logout</a>
+      <a href="/files" class="text-xl text-white text-center border-2 border-green-500 hover:text-green hover:text-green-500 hover:bg-neutral-800 ml-4 rounded-lg bg-green-500 py-2 px-4">Files</a>
     </div>
+      <div class="flex flex-wrap items-center justify-center mt-6">
+      <a href="/upload" class="text-xl text-white text-center border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 mr-4 rounded-lg bg-sky-500 py-2 px-4 sm:ml-2">Upload</a>
+      <a href="/cli" class="text-xl text-white text-center border-2 border-yellow-500 hover:text-yellow-500 hover:text-yellow hover:bg-neutral-800 ml-4 rounded-lg bg-yellow-500 py-2 px-4">CLI</a>
+    </div>
+  </div>
   </div>
 </body>
 </html>
