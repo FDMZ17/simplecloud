@@ -34,7 +34,7 @@ module.exports.load = async function(app, db, dirls) {
       <object data="/usercontent${req.path}" class="max-w-full h-auto mt-14 text-white text-center bg-white" width="100%" >
         The requested data is not found!
       </object>
-      <a class="inline-block text-base border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-sky-500 py-2 px-4 mb-3 text-white mt-6 text-center" href="/usercontent${req.path}">Download</a>
+      <a target="_blank" class="inline-block text-base border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-sky-500 py-2 px-4 mb-3 text-white mt-6 text-center" href="/usercontent${req.path}">Download</a>
     </div>
   </div>
 </body>
