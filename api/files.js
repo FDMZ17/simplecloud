@@ -9,9 +9,9 @@ module.exports.load = async function(app, db) {
       if (dbList) {
         while (i < dbList.length) {
           listFile.push(`<li> 
-            <a class="inline-block text-md hover:text-primary mb-3 mt-8" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> 
-            <a href="${config.WEB_URL}/${dbList[i]}" class="text-md text-white text-center ml-4 border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 mt-8 rounded-lg bg-sky-500 py-2 px-4">View</a>
-            <a href="${config.WEB_URL}/delete/${dbList[i]}" class="text-md text-white text-center ml-4 border-2 border-red-500 hover:text-red-500 hover:text-red hover:bg-neutral-800 mt-8 rounded-lg bg-red-500 py-2 px-4">Delete</a>
+            <a target="_blank" class="inline-block text-md hover:text-primary mb-3 mt-8" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> 
+            <a target="_blank" href="${config.WEB_URL}/${dbList[i]}" class="text-md text-white text-center ml-4 border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 mt-8 rounded-lg bg-sky-500 py-2 px-4">View</a>
+            <a target="_blank" href="${config.WEB_URL}/delete/${dbList[i]}" class="text-md text-white text-center ml-4 border-2 border-red-500 hover:text-red-500 hover:text-red hover:bg-neutral-800 mt-8 rounded-lg bg-red-500 py-2 px-4">Delete</a>
           </li>`);
           i++;
         }
