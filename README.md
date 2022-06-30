@@ -27,6 +27,7 @@ SimpleCloud is free and open-source File upload server software written in Javas
 ### Prerequisites
 
 NodeJS v16 or higher
+Nginx
 
 ### Installation
 
