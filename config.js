@@ -1,12 +1,11 @@
 module.exports = {
-  "WEB_PORT": 8080,
-  "ID_LENGTH": 5,
-  "WEB_URL": "http://archbox:8080",
-  "PW_SALT": "The salty salt",
-  "TOKEN_SALT": "The super salty salt",
-  "REGISTER_KEY": "test",
-  "FILE_EXTENTION_CHECK": true,
-  "MAX_SIZE": 100,
+  "WEB_PORT": 8000, // web port
+  "ID_LENGTH": 5, // fileid length
+  "WEB_URL": "http://0.0.0.0:8000", // wehsite url
+  "PW_SALT": "The salty salt", // password salt
+  "REGISTER_KEY": "test", // register key
+  "FILE_EXTENTION_CHECK": true, // enable file extention? yes=true no=false
+  "MAX_SIZE": 100, // max file size per upload in MB
   "ALLOWED_EXTENTION": [
     ".png",
     ".jpg",
@@ -34,5 +33,5 @@ module.exports = {
     ".docx",
     ".pdf",
     ".ptx"
-  ]
+  ] 
 }

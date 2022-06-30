@@ -30,6 +30,16 @@ module.exports.load = async function(app, db) {
   });
 
   app.post("/api/auth/register", bodyParser.urlencoded({ extended: true }), async (req, res) => {
+    function genToken(length) {
+    	let result = [];
+    	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    	const charactersLength = characters.length;
+    	for (let i = 0; i < length; i++) {
+      	result.push(characters.charAt(Math.floor(Math.random() *
+        	charactersLength)));
+    }
+    return result.join('');
+  	}
     if (req.body.regKey != config.REGISTER_KEY) {
       return res.redirect("/register");
     }
@@ -45,11 +55,9 @@ module.exports.load = async function(app, db) {
     let saltHash = crypto.createHmac('sha256', config.PW_SALT);
     saltHash.update(req.body.pw);
     let pwHash = saltHash.digest('hex');
+    // Generate token
+    let token = genToken(32);
     let checkName = await db.get(req.body.name);
-    let saltToken = crypto.createHmac('sha256', config.TOKEN_SALT);
-    let registerTime = Date.now();
-    saltToken.update(toString(registerTime));
-    let token = saltToken.digest('hex');
     if (!checkName) {
       db.set(name, {
         name: name,
@@ -58,6 +66,7 @@ module.exports.load = async function(app, db) {
       });
       req.session.loggedIn = true;
       req.session.name = name;
+      req.session.token = token;
       res.redirect("/dash");
     } else {
       res.status(401).redirect("/login")
@@ -73,3 +82,4 @@ module.exports.load = async function(app, db) {
     }
   });
 }
+
