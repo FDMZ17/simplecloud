@@ -28,7 +28,7 @@ function dirls() {
 
 app.use(session({
   name: "authToken",
-  secret: "MySuperSecreetAuthToken",
+  secret: config.COOKIE_SECRET,
   resave: false,
   saveUninitialized: true,
   maxAge: 120000
