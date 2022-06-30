@@ -1,6 +1,6 @@
 ![License](https://img.shields.io/github/license/FDMZ17/simplecloud.svg?style=for-the-badge) ![Repo Size](https://img.shields.io/github/languages/code-size/FDMZ17/simplecloud.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/FDMZ17/simplecloud.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/FDMZ17/simplecloud.svg?style=for-the-badge&social) ![Stars](https://img.shields.io/github/stars/FDMZ17/simplecloud.svg?style=for-the-badge)
     
-# simplecloud
+# SimpleCloud
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 
 ## Description
 
-Simple file upload server written in Javascript/NodeJS
+Expressbin is free and open-source File upload server software written in Javascript/Node.js 
 
 ## Screenshots
 
@@ -30,11 +30,13 @@ NodeJS v16 or higher
 
 ### Installation
 
+```bash
 git clone https://github.com/FDMZ17/simplecloud
 
 npm install
 
 npm start
+```
 
 ## License
 
