@@ -35,9 +35,7 @@ sudo curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 ```sh
 git clone https://github.com/FDMZ17/simplecloud
-
 npm install
-
 npm start
 ```
 
