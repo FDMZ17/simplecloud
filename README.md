@@ -42,4 +42,4 @@ npm start
 
 ## Contacts
 
-<a href="mailto:developer@fdmz17.eu.org"></a>
+[Email](mailto:developer@fdmz17.eu.org)
