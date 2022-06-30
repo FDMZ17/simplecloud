@@ -14,7 +14,7 @@
 
 ## Description
 
-Expressbin is free and open-source File upload server software written in Javascript/Node.js 
+SimpleCloud is free and open-source File upload server software written in Javascript/Node.js 
 
 ## Screenshots
 
