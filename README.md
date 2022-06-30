@@ -7,7 +7,6 @@
 - [Description](#description)
 - [Screenshots](#screenshots)
 - [Built With](#built-with)
-- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [License](#license)
 - [Contacts](#contacts)
@@ -24,14 +23,17 @@ SimpleCloud is free and open-source File upload server software written in Javas
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" height="40px" width="40px" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" height="40px" width="40px" /></a><a href="https://nodejs.org/en/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" height="40px" width="40px" /></a>
 
-### Prerequisites
-
-NodeJS v16 or higher
-Nginx
-
 ### Installation
 
-```bash
+This guide is only for debian-based distributions of GNU/Linux.
+This is fairly easy to install, first install NodeJS 16 via the following commands:
+
+```sh
+sudo apt-get install curl git nginx software-properties-common 
+sudo curl -sL https://deb.nodesource.com/setup_16.x | bash - 
+```
+
+```sh
 git clone https://github.com/FDMZ17/simplecloud
 
 npm install
@@ -40,7 +42,7 @@ npm start
 ```
 
 Now do the following to configure nginx.
-```bash
+```sh
 systemctl start nginx  
 certbot certonly --nginx -d your.domain.com
 cd /etc/nginx/conf.d
