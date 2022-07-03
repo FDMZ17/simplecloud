@@ -72,6 +72,8 @@ server {
   }
 }
 ```
+Make sure to replace `<domain>` with the domain and `<port>` with the port.
+Now run systemctl restart nginx and you should be good to go.
 
 ## License
 
