@@ -1,6 +1,8 @@
-const token = document.querySelector("#token");
-const tokenBtn = document.querySelector("#tokenBtn");
+// grab everything we need
+const btn = document.querySelector("button.mobile-menu-button");
+const menu = document.querySelector(".mobile-menu");
 
-function showToken() {
-  token.classList.toggle("invisible");
-}
+// add event listener
+btn.addEventListener("click", () => {
+  menu.classList.toggle("hidden");
+});
