@@ -16,11 +16,11 @@ module.exports.load = async function(app, db) {
 </head>
 
 <body class="bg-neutral-800">
-	<div class="mt-16 max-w-md p-5 mx-auto rounded shadow-sm">
-    <h2 class="px-4 text-4xl text-white text-center">Upload file</h2>
-    <h2 class="mt-8 px-4 text-xl text-white text-center">Max size: ${config.MAX_SIZE}MB</h2>
+	<div class="p-5 mx-auto mt-16 max-w-md rounded shadow-sm">
+    <h2 class="px-4 text-4xl text-center text-white">Upload file</h2>
+    <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${config.MAX_SIZE}MB</h2>
 		<form class="mt-10 space-y-8" action="/api/upload" method="POST" enctype="multipart/form-data">
-        <input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-neutral-800 text-neutral-300" placeholder="File"
+        <input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-neutral-800 text-neutral-300" placeholder="File"
 					type="file" name="file" required />
 			<div>
 				<div class="flex flex-col justify-center md:flex-row md:items-center">

@@ -9,9 +9,9 @@ module.exports.load = async function(app, db) {
       if (dbList) {
         while (i < dbList.length) {
           listFile.push(`<li> 
-            <a target="_blank" class="inline-block text-md hover:text-primary mb-3 mt-8" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> 
-            <a target="_blank" href="${config.WEB_URL}/${dbList[i]}" class="text-md text-white text-center ml-4 border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 mt-8 rounded-lg bg-sky-500 py-2 px-4">View</a>
-            <a href="${config.WEB_URL}/delete/${dbList[i]}" class="text-md text-white text-center ml-4 border-2 border-red-500 hover:text-red-500 hover:text-red hover:bg-neutral-800 mt-8 rounded-lg bg-red-500 py-2 px-4">Delete</a>
+            <a target="_blank" class="inline-block mt-8 mb-3 text-md hover:text-primary" href="${config.WEB_URL}/${dbList[i]}">${dbList[i]}</a> 
+            <a target="_blank" href="${config.WEB_URL}/${dbList[i]}" class="px-4 py-2 mt-8 ml-4 text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 text-md hover:text-sky-500 hover:text-sky hover:bg-neutral-800">View</a>
+            <a href="${config.WEB_URL}/delete/${dbList[i]}" class="px-4 py-2 mt-8 ml-4 text-center text-white bg-red-500 rounded-lg border-2 border-red-500 text-md hover:text-red-500 hover:text-red hover:bg-neutral-800">Delete</a>
           </li>`);
           i++;
         }
@@ -29,12 +29,12 @@ module.exports.load = async function(app, db) {
 </head>
 
 <body class="bg-neutral-800">
-	<div class="mt-16 max-w-2xl p-5 mx-auto rounded shadow-sm">
-    <h2 class="px-4 text-4xl text-white text-center">Simple cloud dashboard</h2>
-    <p class="px-4 text-xl text-white text-center mt-12">Welcome back ${req.session.name}</p>
+	<div class="p-5 mx-auto mt-16 max-w-2xl rounded shadow-sm">
+    <h2 class="px-4 text-4xl text-center text-white">Simple cloud dashboard</h2>
+    <p class="px-4 mt-12 text-xl text-center text-white">Welcome back ${req.session.name}</p>
     <div class="w-full">
-      <h3 class="font-semibold text-xl text-white mb-3 text-center mt-8">Your file:</h3>
-      <ul class="text-slate-300 text-center">
+      <h3 class="mt-8 mb-3 text-xl font-semibold text-center text-white">Your file:</h3>
+      <ul class="text-center text-slate-300">
       ${listFile.reverse().join("")}
       </ul>
     </div>

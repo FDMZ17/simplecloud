@@ -27,14 +27,14 @@ module.exports.load = async function(app, db, dirls) {
 </head>
 
 <body class="bg-neutral-800">
-	<div class="mt-16 max-w-2xl p-5 mx-auto rounded shadow-sm">
-    <h2 class="px-4 text-4xl text-white text-center">File preview</h2>
-    <div class="flex flex-wrap w-full items-center justify-center">
-      <!-- <iframe src="/usercontent${req.path}" class="max-w-full h-auto mt-14" alt="${req.path}"></iframe> --> 
-      <object data="/usercontent${req.path}" class="max-w-full h-auto mt-14 text-white text-center bg-white" width="100%" >
+	<div class="p-5 mx-auto mt-16 max-w-2xl rounded shadow-sm">
+    <h2 class="px-4 text-4xl text-center text-white">File preview</h2>
+    <div class="flex flex-wrap justify-center items-center w-full">
+      <!-- <iframe src="/usercontent${req.path}" class="mt-14 max-w-full h-auto" alt="${req.path}"></iframe> --> 
+      <object data="/usercontent${req.path}" class="mt-14 max-w-full h-auto text-center text-white bg-white" width="100%" >
         The requested data is not found!
       </object>
-      <a target="_blank" class="inline-block text-base border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800 ml-5 mr-5 rounded-lg bg-sky-500 py-2 px-4 mb-3 text-white mt-6 text-center" href="/usercontent${req.path}">Download</a>
+      <a target="_blank" class="inline-block px-4 py-2 mt-6 mr-5 mb-3 ml-5 text-base text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800" href="/usercontent${req.path}">Download</a>
     </div>
   </div>
 </body>

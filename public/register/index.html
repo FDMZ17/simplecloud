@@ -10,17 +10,17 @@
 </head>
 
 <body class="bg-neutral-800">
-	<div class="mt-16 max-w-md p-5 mx-auto rounded shadow-sm">
-		<h2 class="px-4 text-4xl text-white text-center">Register</h2>
+	<div class="p-5 mx-auto mt-16 max-w-md rounded shadow-sm">
+		<h2 class="px-4 text-4xl text-center text-white">Register</h2>
 		<form class="mt-10 space-y-8" action="/api/auth/register" method="POST">
-			<input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-stone-900 text-neutral-300" name="name" placeholder="Username"
+			<input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="name" placeholder="Username"
 				type="text" minlength="2" maxlength="16" required />
 
 			<div class="flex items-center">
-				<input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-stone-900 text-neutral-300" name="pw" placeholder="Password"
+				<input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="pw" placeholder="Password"
 					type="password" minlength="8" maxlength="64" required />
 			</div>
-        <input class="w-full h-12 px-4 border rounded focus:outline-none border-none bg-stone-900 text-neutral-300" name="regKey" placeholder="Register key"
+        <input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="regKey" placeholder="Register key"
 					type="password" required />
 			<div>
 				<div class="flex flex-col justify-between md:flex-row md:items-center">
