@@ -1,10 +1,10 @@
 const config = require("../config.js");
 const path = require("path");
 
-module.exports.load = async function(app, db) {
+module.exports.load = async function (app, db) {
   app.get("/upload", async (req, res) => {
     if (req.session.loggedIn) {
-      res.send(` <!DOCTYPE html>
+      res.send(`<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -78,30 +78,30 @@ module.exports.load = async function(app, db) {
   });
 
   app.post("/upload/curl", async (req, res) => {
-      if (res.files == 0) {
-        return res.send("Please attach a file");
+    if (res.files == 0) {
+      return res.send("Please attach a file");
+    }
+    if (!req.body.name) {
+      return res.sendStatus(401);
+    }
+    if (!req.body.token) {
+      return res.sendStatus(401);
+    }
+    const file = req.files.file;
+    const fileExt = path.extname(file.name);
+    if (config.FILE_EXTENTION_CHECK) {
+      if (!config.ALLOWED_EXTENTION.includes(fileExt)) {
+        return res.status(422).send("Files with this extension are not allowed");
       }
-      if(!req.body.name) {
-        return res.sendStatus(401);
+    }
+    let fID = genID(config.ID_LENGTH) + fileExt;
+    let fileURL = config.WEB_URL + "/" + fID;
+    file.mv(`usercontent/${fID}`, (err) => {
+      if (err) {
+        return res.status(500);
       }
-      if(!req.body.token) {
-        return res.sendStatus(401);
-      }
-      const file = req.files.file;
-      const fileExt = path.extname(file.name);
-      if (config.FILE_EXTENTION_CHECK) {
-        if (!config.ALLOWED_EXTENTION.includes(fileExt)) {
-          return res.status(422).send("Files with this extension are not allowed");
-        }
-      }
-      let fID = genID(config.ID_LENGTH) + fileExt;
-      let fileURL = config.WEB_URL + "/" + fID;
-      file.mv(`usercontent/${fID}`, (err) => {
-        if (err) {
-          return res.status(500);
-        }
-        return res.send(`${fileURL}\n`);
-      });
-      db.push(`${req.body.name}.files`, fID)
+      return res.send(`${fileURL}\n`);
+    });
+    db.push(`${req.body.name}.files`, fID)
   });
 }

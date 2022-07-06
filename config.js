@@ -1,7 +1,7 @@
 module.exports = {
   "WEB_PORT": 8000, // web port
   "ID_LENGTH": 5, // fileid length
-  "WEB_URL": "http://0.0.0.0:8000", // wehsite url
+  "WEB_URL": "http://0.0.0.0:8000", // website url
   "COOKIE_SECRET": "My cookie secret", // change it to random number/string
   "PW_SALT": "The salty salt", // password salt
   "REGISTER_KEY": "simplecloud", // register key

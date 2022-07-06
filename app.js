@@ -9,7 +9,6 @@ const config = require("./config.js");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const usercontentDir = __dirname + "/usercontent/"
-// app.use(fileUpload());
 
 app.use(express.static(__dirname + "/public"));
 
