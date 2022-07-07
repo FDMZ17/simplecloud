@@ -44,8 +44,10 @@ module.exports.load = async function (app, db) {
       }
       return result.join('');
     }
-    if (req.body.regKey != config.REGISTER_KEY) {
-      return res.redirect("/register");
+    if (config.REQUIRE_REGISTER_KEY) {
+      if (req.body.regKey != config.REGISTER_KEY) {
+        return res.redirect("/register");
+      }
     }
     if (!req.body.name) {
       return res.redirect("/register");
@@ -54,14 +56,14 @@ module.exports.load = async function (app, db) {
       return res.redirect("/register");
     }
 
-    let name = req.body.name;
+    const name = req.body.name;
     // Password hash
-    let saltHash = crypto.createHmac('sha256', config.PW_SALT);
+    const saltHash = crypto.createHmac('sha256', config.PW_SALT);
     saltHash.update(req.body.pw);
-    let pwHash = saltHash.digest('hex');
+    const pwHash = saltHash.digest('hex');
     // Generate token
-    let token = genToken(32);
-    let checkName = await db.get(req.body.name);
+    const token = genToken(32);
+    const checkName = await db.get(req.body.name);
     if (!checkName) {
       db.set(name, {
         name: name,
@@ -83,14 +85,14 @@ module.exports.load = async function (app, db) {
       if (!req.body.oldPw || !req.body.newPw) {
         res.redirect("/edit");
       }
-      let dbName = await db.get(req.session.name);
-      let saltHash = crypto.createHmac('sha256', config.PW_SALT);
+      const dbName = await db.get(req.session.name);
+      const saltHash = crypto.createHmac('sha256', config.PW_SALT);
       saltHash.update(req.body.oldPw);
-      let pwHash = saltHash.digest('hex');
+      const pwHash = saltHash.digest('hex');
       if (pwHash == dbName.pw) {
-        let saltHash = crypto.createHmac('sha256', config.PW_SALT);
+        const saltHash = crypto.createHmac('sha256', config.PW_SALT);
         saltHash.update(req.body.newPw);
-        let pwHash = saltHash.digest('hex');
+        const pwHash = saltHash.digest('hex');
         await db.set(`${req.session.name}.pw`, pwHash);
         delete req.session.loggedIn;
         res.redirect("/login");

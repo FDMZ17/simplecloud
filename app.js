@@ -9,6 +9,7 @@ const config = require("./config.js");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const usercontentDir = __dirname + "/usercontent/"
+const date_time = new Date();
 
 app.use(express.static(__dirname + "/public"));
 
@@ -27,21 +28,21 @@ function dirls() {
 
 app.use(session({
   name: "authToken",
-  secret: config.COOKIE_SECRET,
+  secret: date_time.toString(),
   resave: false,
   saveUninitialized: true,
   maxAge: 120000
 }));
 
-let pages = fs.readdirSync('./pages').filter(file => file.endsWith('.js'));
+const pages = fs.readdirSync('./pages').filter(file => file.endsWith('.js'));
 pages.forEach(file => {
-  let page = require(`./pages/${file}`);
+  const page = require(`./pages/${file}`);
   page.load(app, db, dirls, usercontentDir);
 });
 
-let apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
+const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
 apiFiles.forEach(file => {
-  let apiFile = require(`./api/${file}`);
+  const apiFile = require(`./api/${file}`);
   apiFile.load(app, db, dirls, usercontentDir);
 });
 

@@ -2,7 +2,7 @@ const config = require("../config.js");
 module.exports.load = async function (app, db) {
     app.get("/dash", async (req, res) => {
         if (req.session.loggedIn) {
-            let dbList = await db.get(`${req.session.name}.files`);
+            const dbList = await db.get(`${req.session.name}.files`);
             let fileCount;
             if (dbList) {
                 fileCount = dbList.length;

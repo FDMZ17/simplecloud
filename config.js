@@ -1,12 +1,12 @@
 module.exports = {
   "WEB_PORT": 8000, // web port
-  "ID_LENGTH": 5, // fileid length
+  "ID_LENGTH": 5, // fileID length
   "WEB_URL": "http://0.0.0.0:8000", // website url
-  "COOKIE_SECRET": "My cookie secret", // change it to random number/string
   "PW_SALT": "The salty salt", // password salt
+  "REQUIRE_REGISTER_KEY": false, // true/false
   "REGISTER_KEY": "simplecloud", // register key
-  "FILE_EXTENTION_CHECK": true, // enable file extention? yes=true no=false
   "MAX_SIZE": 100, // max file size per upload in MB
+  "FILE_EXTENTION_CHECK": true, // true/false 
   "ALLOWED_EXTENTION": [
     ".png",
     ".jpg",
@@ -34,5 +34,5 @@ module.exports = {
     ".docx",
     ".pdf",
     ".ptx"
-  ] 
+  ]
 }

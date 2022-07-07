@@ -2,8 +2,8 @@ const config = require("../config.js");
 
 module.exports.load = async function (app, db, dirls) {
   app.get("/:id", async (req, res) => {
-    let fileChk = dirls();
-    let fileID = req.path.replace("/", "");
+    const fileChk = dirls();
+    const fileID = req.path.replace("/", "");
     if (!fileChk.includes(fileID)) {
       return res.sendStatus(404)
     }

@@ -1,6 +1,6 @@
 module.exports = {
   content: ["api/*.js", "pages/*.js", "public/elements/*.js", "public/**/*.html"],
-  darkMode:  "class",
+  darkMode: "class",
   theme: {
     extend: {
       colors: {

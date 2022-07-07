@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+const config = require("../config.js");
+
+module.exports.load = async function (app) {
+	app.get("/login", async (req, res) => {
+		res.send(`<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,4 +38,6 @@
 	</div>
 </body>
 
-</html>
+</html>`);
+	});
+}

@@ -8,23 +8,26 @@
     "build": "tailwindcss -i src/tailwind-raw.css -o public/elements/style.css --minify",
     "start": "pm2 start app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FDMZ17/simplecloud.git"
+  },
   "author": "FDMZ17",
   "license": "MIT",
-  "devDependencies": {
-    "better-sqlite3": "^7.5.3",
-    "pm2": "^5.2.0",
-    "tailwindcss": "^3.1.4"
-  },
   "dependencies": {
+    "better-sqlite3": "^7.5.3",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
-    "nodemon": "^2.0.18",
+    "pm2": "^5.2.0",
     "quick.db": "^9.0.3"
   },
-    "engines": {
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "engines": {
     "node": ">= 16.x"
   }
 }

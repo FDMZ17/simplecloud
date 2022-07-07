@@ -55,8 +55,8 @@ module.exports.load = async function (app, db) {
         return res.status(422).send("Files with this extension are not allowed");
       }
     }
-    let fID = genID(config.ID_LENGTH) + fileExt;
-    let fileURL = config.WEB_URL + "/" + fID;
+    const fID = genID(config.ID_LENGTH) + fileExt;
+    const fileURL = config.WEB_URL + "/" + fID;
     file.mv(`usercontent/${fID}`, (err) => {
       if (err) {
         return res.status(500);
