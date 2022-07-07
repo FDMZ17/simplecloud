@@ -33,11 +33,16 @@ app.use(session({
   maxAge: 120000
 }));
 
+let pages = fs.readdirSync('./pages').filter(file => file.endsWith('.js'));
+pages.forEach(file => {
+  let page = require(`./pages/${file}`);
+  page.load(app, db, dirls, usercontentDir);
+});
+
 let apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
 apiFiles.forEach(file => {
   let apiFile = require(`./api/${file}`);
   apiFile.load(app, db, dirls, usercontentDir);
-  console.log("| Loaded api: " + file + " |");
 });
 
 if (!fs.existsSync("usercontent")) {

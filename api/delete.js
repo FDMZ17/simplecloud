@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 module.exports.load = async function(app, db, dirls, usercontentDir) {
-  app.get("/delete/:id", async (req, res) => {
+  app.get("/api/delete/:id", async (req, res) => {
     if(req.session.loggedIn) {
       let reqFile = req.path.replace("/delete/", "");
       let dbChk = await db.get(`${req.session.name}.files`);

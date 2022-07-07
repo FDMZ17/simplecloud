@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["api/*.js", "public/elements/*.js", "public/**/*.html"],
+  content: ["api/*.js", "pages/*.js", "public/elements/*.js", "public/**/*.html"],
   darkMode:  "class",
   theme: {
     extend: {
