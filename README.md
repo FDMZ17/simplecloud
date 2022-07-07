@@ -36,6 +36,8 @@ sudo curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 ```sh
 git clone https://github.com/FDMZ17/simplecloud
+cd simplecloud
+nano config.js
 npm install
 npm start
 ```
@@ -44,7 +46,7 @@ Now do the following to configure nginx.
 ```sh
 sudo systemctl start nginx  
 sudo certbot certonly --nginx -d your.domain.com
-sudo cd /etc/nginx/conf.d
+cd /etc/nginx/conf.d
 sudo touch simplecloud.conf  
 sudo nano simplecloud.conf
 ``` 
