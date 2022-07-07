@@ -1,6 +1,6 @@
 const config = require("../config.js");
 
-module.exports.load = async function(app, db) {
+module.exports.load = async function (app, db) {
   app.get("/files", async (req, res) => {
     if (req.session.loggedIn) {
       let dbList = await db.get(`${req.session.name}.files`);

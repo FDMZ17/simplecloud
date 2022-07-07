@@ -1,6 +1,6 @@
 const config = require("../config.js");
 
-module.exports.load = async function(app, db, dirls) {
+module.exports.load = async function (app, db, dirls) {
   app.get("/:id", async (req, res) => {
     let fileChk = dirls();
     let fileID = req.path.replace("/", "");

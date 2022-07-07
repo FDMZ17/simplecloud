@@ -6,3 +6,10 @@ const menu = document.querySelector(".mobile-menu");
 btn.addEventListener("click", () => {
   menu.classList.toggle("hidden");
 });
+
+function copyUrl() {
+  let copyText = document.getElementById("command");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+}

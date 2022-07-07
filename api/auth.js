@@ -2,8 +2,10 @@ const bodyParser = require('body-parser');
 const config = require("../config.js");
 const crypto = require('crypto');
 
-module.exports.load = async function(app, db) {
-  app.post('/api/auth/login', bodyParser.urlencoded({ extended: true }), async (req, res) => {
+module.exports.load = async function (app, db) {
+  app.post('/api/auth/login', bodyParser.urlencoded({
+    extended: true
+  }), async (req, res) => {
     if (!req.body.name) {
       res.redirect("/login");
     }
@@ -29,17 +31,19 @@ module.exports.load = async function(app, db) {
     }
   });
 
-  app.post("/api/auth/register", bodyParser.urlencoded({ extended: true }), async (req, res) => {
+  app.post("/api/auth/register", bodyParser.urlencoded({
+    extended: true
+  }), async (req, res) => {
     function genToken(length) {
-    	let result = [];
-    	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    	const charactersLength = characters.length;
-    	for (let i = 0; i < length; i++) {
-      	result.push(characters.charAt(Math.floor(Math.random() *
-        	charactersLength)));
+      let result = [];
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result.push(characters.charAt(Math.floor(Math.random() *
+          charactersLength)));
+      }
+      return result.join('');
     }
-    return result.join('');
-  	}
     if (req.body.regKey != config.REGISTER_KEY) {
       return res.redirect("/register");
     }
@@ -72,14 +76,27 @@ module.exports.load = async function(app, db) {
       res.status(401).redirect("/login")
     }
   });
-
-  app.get('/logout', async (req, res) => {
+  app.post('/api/password', bodyParser.urlencoded({
+    extended: true
+  }), async (req, res) => {
     if (req.session.loggedIn) {
-      delete req.session.loggedIn;
-      res.redirect("/")
-    } else {
-      res.redirect("/login");
+      if (!req.body.oldPw || !req.body.newPw) {
+        res.redirect("/edit");
+      }
+      let dbName = await db.get(req.session.name);
+      let saltHash = crypto.createHmac('sha256', config.PW_SALT);
+      saltHash.update(req.body.oldPw);
+      let pwHash = saltHash.digest('hex');
+      if (pwHash == dbName.pw) {
+        let saltHash = crypto.createHmac('sha256', config.PW_SALT);
+        saltHash.update(req.body.newPw);
+        let pwHash = saltHash.digest('hex');
+        await db.set(`${req.session.name}.pw`, pwHash);
+        delete req.session.loggedIn;
+        res.redirect("/login");
+      } else {
+        res.redirect("/login");
+      }
     }
   });
 }
-

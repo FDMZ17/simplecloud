@@ -1,9 +1,9 @@
 const config = require("../config.js");
 
 module.exports.load = async function (app, db) {
-  app.get("/upload", async (req, res) => {
-    if (req.session.loggedIn) {
-      res.send(`<!DOCTYPE html>
+	app.get("/upload", async (req, res) => {
+		if (req.session.loggedIn) {
+			res.send(`<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,8 +34,8 @@ module.exports.load = async function (app, db) {
 
 </html>
 `);
-    } else {
-      res.redirect("/login");
-    }
-  });
+		} else {
+			res.redirect("/login");
+		}
+	});
 }

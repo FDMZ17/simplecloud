@@ -1,8 +1,8 @@
 const config = require("../config.js");
 
-module.exports.load = async function(app) {
+module.exports.load = async function (app) {
   app.get("/cli", async (req, res) => {
-    if(req.session.loggedIn) {
+    if (req.session.loggedIn) {
       res.send(`
      <!DOCTYPE html>
 <html lang="en">
@@ -24,14 +24,7 @@ module.exports.load = async function(app) {
       onclick="copyUrl()">Copy</button>
     </div>
   </div>
-  <script>
-  function copyUrl() {
-			let copyText = document.getElementById("command");
-			copyText.select();
-			copyText.setSelectionRange(0, 99999);
-			document.execCommand("copy");
-			}
-  </script>
+  <script src="/elements/script.js"></script>
 </body>
 </html>`);
       res.end();

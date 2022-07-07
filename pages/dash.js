@@ -1,15 +1,15 @@
 const config = require("../config.js");
 module.exports.load = async function (app, db) {
-  app.get("/dash", async (req, res) => {
-    if (req.session.loggedIn) {
-      let dbList = await db.get(`${req.session.name}.files`);
-      let fileCount;
-      if (dbList) {
-        fileCount = dbList.length;
-      } else {
-        fileCount = 0;
-      }
-      res.send(`<!DOCTYPE html>
+    app.get("/dash", async (req, res) => {
+        if (req.session.loggedIn) {
+            let dbList = await db.get(`${req.session.name}.files`);
+            let fileCount;
+            if (dbList) {
+                fileCount = dbList.length;
+            } else {
+                fileCount = 0;
+            }
+            res.send(`<!DOCTYPE html>
       <html lang="en">
       
       <head>
@@ -37,6 +37,7 @@ module.exports.load = async function (app, db) {
                               <div class="hidden items-center space-x-1 md:flex">
                                   <a class="px-2 py-5 text-white hover:font-bold" href="/upload">Upload</a>
                                   <a class="px-2 py-5 text-white hover:font-bold" href="/files">Files</a>
+                                  <a class="px-2 py-5 text-white hover:font-bold" href="/edit">Edit</a>
                                   <a class="px-2 py-5 text-white hover:font-bold" href="/cli">CLI</a>
                               </div>
                           </div>
@@ -98,13 +99,13 @@ module.exports.load = async function (app, db) {
                               </div>
                           </div>
                       </div>
-                      <script src="/elements/dash.js"></script>
+                      <script src="/elements/script.js"></script>
       </body>
       
       </html>`);
-      res.end();
-    } else {
-      res.redirect("/login");
-    }
-  });
+            res.end();
+        } else {
+            res.redirect("/login");
+        }
+    });
 };
