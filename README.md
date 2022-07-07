@@ -27,11 +27,11 @@ SimpleCloud is free and open-source File upload server software written in Javas
 
 This guide is only for debian-based distributions of GNU/Linux.
 
-This is fairly easy to install, first install NodeJS 16 via the following commands [run as root]:
+This is fairly easy to install, first install NodeJS 16 via the following commands:
 
 ```sh
-apt-get install curl git nginx software-properties-common 
-curl -sL https://deb.nodesource.com/setup_16.x | bash - 
+sudo apt-get install curl git nginx software-properties-common 
+sudo curl -sL https://deb.nodesource.com/setup_16.x | bash - 
 ```
 
 ```sh
@@ -42,11 +42,11 @@ npm start
 
 Now do the following to configure nginx.
 ```sh
-systemctl start nginx  
-certbot certonly --nginx -d your.domain.com
-cd /etc/nginx/conf.d
-touch simplecloud.conf  
-nano simplecloud.conf
+sudo systemctl start nginx  
+sudo certbot certonly --nginx -d your.domain.com
+sudo cd /etc/nginx/conf.d
+sudo touch simplecloud.conf  
+sudo nano simplecloud.conf
 ``` 
 
 Now paste the following:   
