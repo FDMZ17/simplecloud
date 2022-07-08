@@ -11,6 +11,8 @@ const fileUpload = require("express-fileupload");
 const usercontentDir = __dirname + "/usercontent/"
 const date_time = new Date();
 
+app.set('trust proxy', 1);
+
 app.use(express.static(__dirname + "/public"));
 
 app.use(fileUpload({
