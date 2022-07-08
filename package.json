@@ -22,7 +22,8 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "pm2": "^5.2.0",
-    "quick.db": "^9.0.3"
+    "quick.db": "^9.0.3",
+    "tailwindcss": "^3.1.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

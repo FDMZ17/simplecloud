@@ -1,6 +1,9 @@
 const bodyParser = require('body-parser');
 const config = require("../config.js");
 const crypto = require('crypto');
+const {
+  PW_SALT
+} = require('../config.js');
 
 module.exports.load = async function (app, db) {
   app.post('/api/auth/login', bodyParser.urlencoded({
@@ -12,11 +15,11 @@ module.exports.load = async function (app, db) {
     if (!req.body.pw) {
       res.redirect("/login");
     }
-    let dbName = await db.get(req.body.name);
+    const dbName = await db.get(req.body.name);
     if (!dbName || dbName == null || dbName == "null") {
       res.redirect("/login");
     } else {
-      let saltHash = crypto.createHmac('sha256', config.PW_SALT);
+      let saltHash = crypto.createHmac('sha256', dbName.salt);
       saltHash.update(req.body.pw);
       let pwHash = saltHash.digest('hex');
       if (pwHash == dbName.pw) {
@@ -58,7 +61,8 @@ module.exports.load = async function (app, db) {
 
     const name = req.body.name;
     // Password hash
-    const saltHash = crypto.createHmac('sha256', config.PW_SALT);
+    const pwSalt = genToken(16)
+    const saltHash = crypto.createHmac('sha256', pwSalt);
     saltHash.update(req.body.pw);
     const pwHash = saltHash.digest('hex');
     // Generate token
@@ -68,6 +72,7 @@ module.exports.load = async function (app, db) {
       db.set(name, {
         name: name,
         pw: pwHash,
+        salt: pwSalt,
         token: token
       });
       req.session.loggedIn = true;
@@ -86,11 +91,11 @@ module.exports.load = async function (app, db) {
         res.redirect("/edit");
       }
       const dbName = await db.get(req.session.name);
-      const saltHash = crypto.createHmac('sha256', config.PW_SALT);
+      const saltHash = crypto.createHmac('sha256', dbName.salt);
       saltHash.update(req.body.oldPw);
       const pwHash = saltHash.digest('hex');
       if (pwHash == dbName.pw) {
-        const saltHash = crypto.createHmac('sha256', config.PW_SALT);
+        const saltHash = crypto.createHmac('sha256', dbName.salt);
         saltHash.update(req.body.newPw);
         const pwHash = saltHash.digest('hex');
         await db.set(`${req.session.name}.pw`, pwHash);
