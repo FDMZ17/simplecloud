@@ -31,7 +31,12 @@ app.use(session({
   secret: date_time.toString(),
   resave: false,
   saveUninitialized: true,
-  maxAge: 120000
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    secure: config.SECURE_COOKIE,
+    maxAge: 1 * 12 * 60 * 60 * 1000
+  }
 }));
 
 const pages = fs.readdirSync('./pages').filter(file => file.endsWith('.js'));

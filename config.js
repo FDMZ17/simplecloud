@@ -3,6 +3,7 @@ module.exports = {
   "ID_LENGTH": 5, // fileID length
   "WEB_URL": "http://0.0.0.0:8000", // website url
   "REQUIRE_REGISTER_KEY": false, // true/false
+  "SECURE_COOKIE": true, // true for https. false for http 
   "REGISTER_KEY": "simplecloud", // register key
   "MAX_SIZE": 100, // max file size per upload in MB
   "FILE_EXTENTION_CHECK": true, // true/false 
