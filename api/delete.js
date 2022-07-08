@@ -3,7 +3,7 @@ const fs = require("fs");
 module.exports.load = async function (app, db, dirls, usercontentDir) {
   app.get("/api/delete/:id", async (req, res) => {
     if (req.session.loggedIn) {
-      const reqFile = req.path.replace("/delete/", "");
+      const reqFile = req.path.replace("/api/delete/", "");
       const dbChk = await db.get(`${req.session.name}.files`);
       if (!dbChk.includes(reqFile)) {
         return res.sendStatus(404);
