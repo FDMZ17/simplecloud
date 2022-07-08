@@ -59,6 +59,7 @@ module.exports.load = async function (app, db) {
                   <div class="hidden mobile-menu md:hidden">
                       <a href="/upload" class="block px-4 py-4 text-sm text-center text-white">Upload</a>
                       <a href="/files" class="block px-4 py-4 text-sm text-center text-white">Files</a>
+                      <a href="/edit" class="block px-4 py-4 text-sm text-center text-white">Edit</a>   
                       <a href="/cli" class="block px-4 py-4 text-sm text-center text-white">CLI</a>
                       <a href="/logout" class="block px-4 py-4 text-sm text-center text-white">Logout</a>
                   </div>
