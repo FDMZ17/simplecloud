@@ -65,7 +65,7 @@ module.exports.load = async function (app, db) {
                   </div>
               </nav>
               <div class="flex overflow-x-hidden flex-col w-full">
-                  <main class="flex-grow p-6 mt-16 w-full">
+                  <div class="flex-grow p-6 mt-16 w-full">
                       <div class="flex flex-wrap">
                           <div class="p-3 w-full md:w-1/4 xl:w-1/3">
                               <div class="p-2 bg-white rounded border shadow">

@@ -31,7 +31,7 @@ This is fairly easy to install, first install NodeJS 16 via the following comman
 
 ```sh
 sudo apt-get install curl git nginx software-properties-common 
-sudo curl -sL https://deb.nodesource.com/setup_16.x | bash - 
+sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - 
 ```
 
 ```sh
