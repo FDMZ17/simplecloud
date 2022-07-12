@@ -16,7 +16,7 @@ module.exports.load = async function (app) {
 
 <body class="bg-neutral-800">
 	<div class="p-5 mx-auto mt-16 max-w-md rounded shadow-sm">
-		<h2 class="px-4 text-4xl text-center text-white">Login </h2>
+		<h2 class="px-4 text-4xl text-center text-white">Change password</h2>
 		<form class="mt-10 space-y-8" action="/api/password" method="POST">
 			<input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="oldPw" placeholder="Old password"
 				type="password" minlength="8" maxlength="64" required />
