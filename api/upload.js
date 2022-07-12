@@ -66,6 +66,9 @@ module.exports.load = async function (app, db) {
       }
       return res.send(`${fileURL}\n`);
     });
-    db.push(`${req.body.name}.files`, fID)
+    const fileSize = (file.size / 1024 / 1024).toFixed(2);
+    await db.push(`${req.session.name}.files`, fID);
+    await db.add(`${req.session.name}.size`, Number(fileSize));
+    await db.push(`data.${fID}`, fileSize);
   });
 }
