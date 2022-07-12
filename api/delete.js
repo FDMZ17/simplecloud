@@ -8,8 +8,16 @@ module.exports.load = async function (app, db, dirls, usercontentDir) {
       if (!dbChk.includes(reqFile)) {
         return res.sendStatus(404);
       }
+      const fileID = req.path.replace("/api/delete/", "");
+      const dbCheck = await db.get(`data.${fileID}`);
+      if (!dbCheck) {
+        return res.sendStatus(404);
+      }
+      const fileSize = Number(dbCheck);
       await fs.unlinkSync(usercontentDir + reqFile);
       await db.pull(`${req.session.name}.files`, reqFile);
+      await db.delete(`data.${reqFile}`)
+      await db.sub(`${req.session.name}.size`, fileSize)
       return res.redirect("/files");
     } else {
       res.redirect("/login");

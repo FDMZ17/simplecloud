@@ -9,6 +9,14 @@ module.exports.load = async function (app, db) {
             } else {
                 fileCount = 0;
             }
+
+            const uploadedSize = await db.get(`${req.session.name}.size`);
+            let size;
+            if (uploadedSize) {
+                size = uploadedSize.toFixed(2);
+            } else {
+                size = 0;
+            }
             res.send(`<!DOCTYPE html>
       <html lang="en">
       
@@ -93,8 +101,8 @@ module.exports.load = async function (app, db) {
                               <div class="p-2 bg-white rounded border shadow">
                                   <div class="flex flex-row items-center">
                                       <div class="flex-1 text-right md:text-center">
-                                          <h5 class="font-bold text-gray-500 uppercase">Max file size</h5>
-                                          <h3 class="text-3xl font-bold">${config.MAX_SIZE}MB</h3>
+                                          <h5 class="font-bold text-gray-500 uppercase">Uploaded file</h5>
+                                          <h3 class="text-3xl font-bold">${size}MB</h3>
                                       </div>
                                   </div>
                               </div>

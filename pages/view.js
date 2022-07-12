@@ -7,6 +7,13 @@ module.exports.load = async function (app, db, dirls) {
     if (!fileChk.includes(fileID)) {
       return res.sendStatus(404)
     }
+    const reqFile = req.path.replace("/", "");
+    console.log(reqFile)
+    const dbChk = await db.get(`data.${reqFile}`);
+    if (!dbChk) {
+      return res.sendStatus(404);
+    }
+    const fileSize = dbChk;
     res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +45,9 @@ module.exports.load = async function (app, db, dirls) {
     </div>
   </div>
 </body>
+<footer>
+<h2 class="px-4 text-lg text-center text-white">Size: ${fileSize} MB</h2>
+</footer>
 </html>`);
     res.end();
   });
