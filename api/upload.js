@@ -42,6 +42,7 @@ module.exports.load = async function (app, db) {
   });
 
   app.post("/upload/curl", async (req, res) => {
+    const dbName = await db.get(req.body.name);
     if (res.files == 0) {
       return res.send("Please attach a file");
     }
@@ -50,6 +51,9 @@ module.exports.load = async function (app, db) {
     }
     if (!req.body.token) {
       return res.sendStatus(401);
+    }
+    if (req.body.token != dbName.token) {
+      return req.sendStatus(401);
     }
     const file = req.files.file;
     const fileExt = path.extname(file.name);
