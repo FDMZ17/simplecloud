@@ -37,7 +37,7 @@ sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 ```sh
 git clone https://github.com/FDMZ17/simplecloud
 cd simplecloud
-nano config.js
+nano config.json
 npm install
 npm start
 ```
