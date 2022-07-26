@@ -1,4 +1,4 @@
-const config = require("../config.js");
+const config = require("../config.json");
 
 module.exports.load = async function (app, db) {
 	app.get("/upload", async (req, res) => {
@@ -17,7 +17,7 @@ module.exports.load = async function (app, db) {
 <body class="bg-neutral-800">
 	<div class="p-5 mx-auto mt-16 max-w-md rounded shadow-sm">
     <h2 class="px-4 text-4xl text-center text-white">Upload file</h2>
-    <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${config.MAX_SIZE}MB</h2>
+    <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${config.upload.max_filesize}MB</h2>
 		<form class="mt-10 space-y-8" action="/api/upload" method="POST" enctype="multipart/form-data">
         <input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-neutral-800 text-neutral-300" placeholder="File"
 					type="file" name="file" required />

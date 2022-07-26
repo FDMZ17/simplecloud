@@ -1,5 +1,3 @@
-const config = require("../config.js");
-
 module.exports.load = async function (app) {
 	app.get("/edit", async (req, res) => {
 		if (req.session.loggedIn) {

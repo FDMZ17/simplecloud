@@ -1,12 +1,11 @@
-const config = require("../config.js");
 module.exports.load = async function (app, db, dirls) {
     app.get("/", async (req, res) => {
         const dbList = await db.all();
-        let fileCount;
+        let userCount;
         if (dbList) {
-            fileCount = dbList.length;
+            userCount = dbList.filter(e => e !== 'data').length;
         } else {
-            fileCount = 0;
+            userCount = 0;
         }
         const fileLs = dirls();
         res.send(`<!DOCTYPE html>
@@ -36,7 +35,7 @@ module.exports.load = async function (app, db, dirls) {
                             <div class="flex flex-row items-center">
                                 <div class="flex-1 text-right md:text-center">
                                     <h5 class="font-bold text-gray-500 uppercase">Usercount</h5>
-                                    <h3 class="text-3xl font-bold">${fileCount}</h3>
+                                    <h3 class="text-3xl font-bold">${userCount}</h3>
                                 </div>
                             </div>
                         </div>

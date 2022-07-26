@@ -5,7 +5,7 @@ const {
   QuickDB
 } = require('quick.db');
 const db = new QuickDB();
-const config = require("./config.js");
+const config = require("./config.json");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const usercontentDir = __dirname + "/usercontent/"
@@ -17,7 +17,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use(fileUpload({
   limits: {
-    fileSize: 1024 * 1024 * config.MAX_SIZE
+    fileSize: 1024 * 1024 * config.upload.max_filesize
   },
   abortOnLimit: true
 }));
@@ -36,7 +36,7 @@ app.use(session({
   cookie: {
     path: '/',
     httpOnly: true,
-    secure: config.SECURE_COOKIE,
+    secure: config.website.secure_cookie,
     maxAge: 1 * 12 * 60 * 60 * 1000
   }
 }));
@@ -58,5 +58,5 @@ if (!fs.existsSync("usercontent")) {
   console.log("Creating usercontent directory");
 }
 
-app.listen(config.WEB_PORT);
-console.log("Running on: " + config.WEB_URL);
+app.listen(config.website.port);
+console.log("Running on: " + config.website.app_url);

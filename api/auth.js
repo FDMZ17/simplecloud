@@ -1,9 +1,6 @@
 const bodyParser = require('body-parser');
-const config = require("../config.js");
+const config = require("../config.json");
 const crypto = require('crypto');
-const {
-  PW_SALT
-} = require('../config.js');
 
 module.exports.load = async function (app, db) {
   app.post('/api/auth/login', bodyParser.urlencoded({
@@ -47,8 +44,8 @@ module.exports.load = async function (app, db) {
       }
       return result.join('');
     }
-    if (config.REQUIRE_REGISTER_KEY) {
-      if (req.body.regKey != config.REGISTER_KEY) {
+    if (config.auth.require_register_key) {
+      if (req.body.regKey != config.auth.register_key) {
         return res.redirect("/register");
       }
     }

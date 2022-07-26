@@ -1,4 +1,4 @@
-const config = require("../config.js");
+const config = require("../config.json");
 
 module.exports.load = async function (app) {
 	app.get("/login", async (req, res) => {
@@ -18,11 +18,11 @@ module.exports.load = async function (app) {
 		<h2 class="px-4 text-4xl text-center text-white">Login </h2>
 		<form class="mt-10 space-y-8" action="/api/auth/login" method="POST">
 			<input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="name" placeholder="Username"
-				type="text" minlength="2" maxlength="16" required />
+				type="text" minlength="${config.auth.min_name_length}" maxlength="${config.auth.max_name_length}" required />
 
 			<div class="flex items-center">
 				<input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="pw" placeholder="Password"
-					type="password" minlength="8" maxlength="64" required />
+					type="password" minlength="${config.auth.min_pw_length}" maxlength="${config.auth.max_pw_length}" required />
 			</div>
 			<div>
 				<div class="flex flex-col justify-between md:flex-row md:items-center">

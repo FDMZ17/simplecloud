@@ -1,4 +1,3 @@
-const config = require("../config.js");
 module.exports.load = async function (app, db) {
     app.get("/dash", async (req, res) => {
         if (req.session.loggedIn) {

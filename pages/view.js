@@ -1,4 +1,4 @@
-const config = require("../config.js");
+const config = require("../config.json");
 
 module.exports.load = async function (app, db, dirls) {
   app.get("/:id", async (req, res) => {
@@ -8,8 +8,8 @@ module.exports.load = async function (app, db, dirls) {
       return res.sendStatus(404)
     }
     const reqFile = req.path.replace("/", "");
-    console.log(reqFile)
-    const dbChk = await db.get(`data.${reqFile}`);
+    const [fileName, fileExt] = reqFile.split('.');
+    const dbChk = await db.get(`data.${fileName}`);
     if (!dbChk) {
       return res.sendStatus(404);
     }
@@ -22,12 +22,12 @@ module.exports.load = async function (app, db, dirls) {
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, minimum-scale=0.1">
-  <meta property="og:url" content="${config.WEB_URL}${req.path}">
+  <meta property="og:url" content="${config.website.app_url}${req.path}">
   <meta property="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#547C97">
   <meta name="description" content="${req.path}">
   <meta property="og:title" content="A file has appeared">
-  <meta property="og:image" content="${config.WEB_URL}/usercontent${req.path}">
+  <meta property="og:image" content="${config.website.app_url}/usercontent${req.path}">
   <meta property="og:image:type" content="image/png" />
 	<title>File preview | Simple cloud</title>
 	<link href="/elements/style.css" rel="stylesheet" />

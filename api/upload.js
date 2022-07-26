@@ -1,4 +1,4 @@
-const config = require("../config.js");
+const config = require("../config.json");
 const path = require("path");
 
 module.exports.load = async function (app, db) {
@@ -22,13 +22,14 @@ module.exports.load = async function (app, db) {
     }
     const file = req.files.file;
     const fileExt = path.extname(file.name);
-    if (config.FILE_EXTENTION_CHECK) {
-      if (!config.ALLOWED_EXTENTION.includes(fileExt)) {
+    if (config.upload.file_extention_check) {
+      if (!config.upload.allowed_extention.includes(fileExt)) {
         return res.status(422).send("Files with this extension are not allowed");
       }
     }
-    let fID = genID(config.ID_LENGTH) + fileExt;
-    let fileURL = config.WEB_URL + "/" + fID;
+    const rawID = genID(config.upload.id_length);
+    const fID = rawID + fileExt;
+    const fileURL = config.website.app_url + "/" + fID;
     file.mv(`usercontent/${fID}`, (err) => {
       if (err) {
         return res.status(500).redirect("/")
@@ -38,11 +39,10 @@ module.exports.load = async function (app, db) {
     const fileSize = (file.size / 1024 / 1024).toFixed(2);
     await db.push(`${req.session.name}.files`, fID);
     await db.add(`${req.session.name}.size`, Number(fileSize));
-    await db.push(`data.${fID}`, fileSize);
+    await db.push(`data.${rawID}`, fileSize);
   });
 
   app.post("/upload/curl", async (req, res) => {
-    const dbName = await db.get(req.body.name);
     if (res.files == 0) {
       return res.send("Please attach a file");
     }
@@ -52,18 +52,20 @@ module.exports.load = async function (app, db) {
     if (!req.body.token) {
       return res.sendStatus(401);
     }
+    const dbName = await db.get(req.body.name);
     if (req.body.token != dbName.token) {
       return req.sendStatus(401);
     }
     const file = req.files.file;
     const fileExt = path.extname(file.name);
-    if (config.FILE_EXTENTION_CHECK) {
-      if (!config.ALLOWED_EXTENTION.includes(fileExt)) {
+    if (config.upload.file_extention_check) {
+      if (!config.upload.allowed_extention.includes(fileExt)) {
         return res.status(422).send("Files with this extension are not allowed");
       }
     }
-    const fID = genID(config.ID_LENGTH) + fileExt;
-    const fileURL = config.WEB_URL + "/" + fID;
+    const rawID = genID(config.upload.id_length);
+    const fID = rawID + fileExt;
+    const fileURL = config.website.app_url + "/" + fID;
     file.mv(`usercontent/${fID}`, (err) => {
       if (err) {
         return res.status(500);
@@ -73,6 +75,6 @@ module.exports.load = async function (app, db) {
     const fileSize = (file.size / 1024 / 1024).toFixed(2);
     await db.push(`${req.body.name}.files`, fID);
     await db.add(`${req.body.name}.size`, Number(fileSize));
-    await db.push(`data.${fID}`, fileSize);
+    await db.push(`data.${rawID}`, fileSize);
   });
 }
