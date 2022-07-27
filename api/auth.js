@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const config = require("../config.json");
+const generator = require("../modules/generator.js");
 const crypto = require('crypto');
 
 module.exports.load = async function (app, db) {
@@ -12,7 +13,8 @@ module.exports.load = async function (app, db) {
     if (!req.body.pw) {
       res.redirect("/login");
     }
-    const dbName = await db.get(req.body.name);
+    const name = req.body.name;
+    const dbName = await db.get(name);
     if (!dbName || dbName == null || dbName == "null") {
       res.redirect("/login");
     } else {
@@ -20,7 +22,7 @@ module.exports.load = async function (app, db) {
       saltHash.update(req.body.pw);
       let pwHash = saltHash.digest('hex');
       if (pwHash == dbName.pw) {
-        res.locals.name = req.body.name;
+        res.locals.name = name;
         req.session.loggedIn = true;
         req.session.name = res.locals.name;
         req.session.token = dbName.token;
@@ -34,16 +36,6 @@ module.exports.load = async function (app, db) {
   app.post("/api/auth/register", bodyParser.urlencoded({
     extended: true
   }), async (req, res) => {
-    function genToken(length) {
-      let result = [];
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const charactersLength = characters.length;
-      for (let i = 0; i < length; i++) {
-        result.push(characters.charAt(Math.floor(Math.random() *
-          charactersLength)));
-      }
-      return result.join('');
-    }
     if (config.auth.require_register_key) {
       if (req.body.regKey != config.auth.register_key) {
         return res.redirect("/register");
@@ -55,15 +47,14 @@ module.exports.load = async function (app, db) {
     if (!req.body.pw) {
       return res.redirect("/register");
     }
-
     const name = req.body.name;
     // Password hash
-    const pwSalt = genToken(16)
+    const pwSalt = generator.gen(16)
     const saltHash = crypto.createHmac('sha256', pwSalt);
     saltHash.update(req.body.pw);
     const pwHash = saltHash.digest('hex');
     // Generate token
-    const token = genToken(32);
+    const token = generator.gen(32);
     const checkName = await db.get(req.body.name);
     if (!checkName) {
       db.set(name, {

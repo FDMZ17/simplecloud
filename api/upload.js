@@ -1,18 +1,8 @@
 const config = require("../config.json");
+const generator = require("../modules/generator.js");
 const path = require("path");
 
 module.exports.load = async function (app, db) {
-  function genID(length) {
-    let result = [];
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result.push(characters.charAt(Math.floor(Math.random() *
-        charactersLength)));
-    }
-    return result.join('');
-  }
-
   app.post("/api/upload", async (req, res) => {
     if (!req.session.loggedIn) {
       return res.redirect("/login");
@@ -27,7 +17,7 @@ module.exports.load = async function (app, db) {
         return res.status(422).send("Files with this extension are not allowed");
       }
     }
-    const rawID = genID(config.upload.id_length);
+    const rawID = generator.gen(config.upload.id_length);
     const fID = rawID + fileExt;
     const fileURL = config.website.app_url + "/" + fID;
     file.mv(`usercontent/${fID}`, (err) => {
@@ -63,7 +53,7 @@ module.exports.load = async function (app, db) {
         return res.status(422).send("Files with this extension are not allowed");
       }
     }
-    const rawID = genID(config.upload.id_length);
+    const rawID = generator.gen(config.upload.id_length);
     const fID = rawID + fileExt;
     const fileURL = config.website.app_url + "/" + fID;
     file.mv(`usercontent/${fID}`, (err) => {
