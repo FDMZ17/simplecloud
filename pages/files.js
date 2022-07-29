@@ -1,4 +1,4 @@
-const config = require("../config.json");
+const config = require("../config.js");
 
 module.exports.load = async function (app, db) {
   app.get("/files", async (req, res) => {

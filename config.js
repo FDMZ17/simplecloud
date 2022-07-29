@@ -1,22 +1,22 @@
-{
-    "website": {
-        "port": 8000,
-        "app_url": "http://0.0.0.0:8000",
-        "secure_cookie": false
+module.exports = {
+    website: {
+        port: 8000,
+        app_url: process.env.url,
+        secure_cookie: false
     },
-    "auth": {
-        "require_register_key": true,
-        "register_key": "simplecloud_changeme",
-        "min_pw_length": 8,
-        "max_pw_length": 64,
-        "min_name_length": 4,
-        "max_name_length": 16
+    auth: {
+        require_register_key: true,
+        register_key: "simplecloud_changeme",
+        min_pw_length: 8,
+        max_pw_length: 64,
+        min_name_length: 4,
+        max_name_length: 16
     },
-    "upload": {
-        "max_filesize": 100,
-        "id_length": 5,
-        "file_extention_check": true,
-        "allowed_extention": [
+    upload: {
+        max_filesize: 100,
+        id_length: 5,
+        file_extention_check: true,
+        allowed_extention: [
             ".png",
             ".jpg",
             ".jpeg",

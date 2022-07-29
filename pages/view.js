@@ -1,4 +1,4 @@
-const config = require("../config.json");
+const config = require("../config.js");
 
 module.exports.load = async function (app, db, dirls) {
   app.get("/:id", async (req, res) => {

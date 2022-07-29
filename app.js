@@ -5,7 +5,7 @@ const {
   QuickDB
 } = require('quick.db');
 const db = new QuickDB();
-const config = require("./config.json");
+const config = require("./config.js");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const usercontentDir = __dirname + "/usercontent/"
