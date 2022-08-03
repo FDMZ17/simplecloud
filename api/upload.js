@@ -1,4 +1,4 @@
-const config = require("../config.json");
+const config = require("../config");
 const generator = require("../modules/generator.js");
 const path = require("path");
 

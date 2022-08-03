@@ -1,4 +1,4 @@
-const config = require("../config.json");
+const config = require("../config");
 
 module.exports.load = async function (app, db, dirls) {
   app.get("/:id", async (req, res) => {
@@ -14,6 +14,12 @@ module.exports.load = async function (app, db, dirls) {
       return res.sendStatus(404);
     }
     const fileSize = dbChk;
+    let motd;
+    const motdArray = config.website.embed_motd;
+    if(config.website.random_embed_motd === true) {
+      const randomNum = Math.floor(Math.random() * motdArray.length);
+      motd = motdArray[randomNum];
+    }
     res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +32,7 @@ module.exports.load = async function (app, db, dirls) {
   <meta property="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#547C97">
   <meta name="description" content="${req.path}">
-  <meta property="og:title" content="A file has appeared">
+  <meta property="og:title" content="${motd}">
   <meta property="og:image" content="${config.website.app_url}/usercontent${req.path}">
   <meta property="og:image:type" content="image/png" />
 	<title>File preview | Simple cloud</title>
@@ -37,7 +43,6 @@ module.exports.load = async function (app, db, dirls) {
 	<div class="p-5 mx-auto mt-16 max-w-2xl rounded shadow-sm">
     <h2 class="px-4 text-4xl text-center text-white">File preview</h2>
     <div class="flex flex-wrap justify-center items-center w-full">
-      <!-- <iframe src="/usercontent${req.path}" class="mt-14 max-w-full h-auto" alt="${req.path}"></iframe> --> 
       <object data="/usercontent${req.path}" class="mt-14 max-w-full h-auto text-center text-white bg-white" width="100%" >
         The requested data is not found!
       </object>

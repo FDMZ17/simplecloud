@@ -1,5 +1,5 @@
 const bodyParser = require('body-parser');
-const config = require("../config.json");
+const config = require("../config");
 const generator = require("../modules/generator.js");
 const crypto = require('crypto');
 

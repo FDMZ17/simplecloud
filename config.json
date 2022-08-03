@@ -2,7 +2,14 @@
     "website": {
         "port": 8000,
         "app_url": "http://0.0.0.0:8000",
-        "secure_cookie": false
+        "secure_cookie": false,
+        "random_embed_motd": true,
+        "embed_motd": [
+            "A file has appeared",
+            "Some random file has appeared!",
+            "Hey look at this file",
+            "Imagine a file..."
+        ]
     },
     "auth": {
         "require_register_key": true,
