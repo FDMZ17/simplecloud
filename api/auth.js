@@ -63,6 +63,7 @@ module.exports.load = async function (app, db) {
         salt: pwSalt,
         token: token
       });
+      db.push("accountList", name);
       req.session.loggedIn = true;
       req.session.name = name;
       req.session.token = token;

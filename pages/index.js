@@ -1,9 +1,9 @@
 module.exports.load = async function (app, db, dirls) {
     app.get("/", async (req, res) => {
-        const dbList = await db.all();
+        const dbList = await db.get("accountList");
         let userCount;
         if (dbList) {
-            userCount = dbList.filter(e => e !== 'data').length;
+            userCount = dbList.length
         } else {
             userCount = 0;
         }
