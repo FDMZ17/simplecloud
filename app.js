@@ -1,10 +1,8 @@
 const express = require("express");
 const session = require('express-session');
 const app = express();
-const {
-  QuickDB
-} = require('quick.db');
-const db = new QuickDB();
+const Database = require("./modules/db");
+const db = new Database();
 const config = require("./config");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");

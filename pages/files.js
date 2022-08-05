@@ -3,7 +3,7 @@ const config = require("../config");
 module.exports.load = async function (app, db) {
   app.get("/files", async (req, res) => {
     if (req.session.loggedIn) {
-      const dbList = await db.get(`${req.session.name}.files`);
+      const dbList = await db.get(`${req.session.name}files`);
       let i = 0;
       let listFile = [];
       if (dbList) {

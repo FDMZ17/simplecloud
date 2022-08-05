@@ -9,7 +9,7 @@ module.exports.load = async function (app, db, dirls) {
     }
     const reqFile = req.path.replace("/", "");
     const [fileName, fileExt] = reqFile.split('.');
-    const dbChk = await db.get(`data.${fileName}`);
+    const dbChk = await db.get(`${fileName}`);
     if (!dbChk) {
       return res.sendStatus(404);
     }

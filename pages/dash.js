@@ -1,7 +1,7 @@
 module.exports.load = async function (app, db) {
     app.get("/dash", async (req, res) => {
         if (req.session.loggedIn) {
-            const dbList = await db.get(`${req.session.name}.files`);
+            const dbList = await db.get(`${req.session.name}files`);
             let fileCount;
             if (dbList) {
                 fileCount = dbList.length;
@@ -9,7 +9,7 @@ module.exports.load = async function (app, db) {
                 fileCount = 0;
             }
 
-            const uploadedSize = await db.get(`${req.session.name}.size`);
+            const uploadedSize = await db.get(`${req.session.name}size`);
             let size;
             if (uploadedSize) {
                 size = uploadedSize.toFixed(2);

@@ -14,7 +14,7 @@ module.exports.load = async function (app, db) {
       res.redirect("/login");
     }
     const name = req.body.name;
-    const dbName = await db.get(name);
+    const dbName = db.get(name);
     if (!dbName || dbName == null || dbName == "null") {
       res.redirect("/login");
     } else {
@@ -55,7 +55,7 @@ module.exports.load = async function (app, db) {
     const pwHash = saltHash.digest('hex');
     // Generate token
     const token = generator.gen(32);
-    const checkName = await db.get(req.body.name);
+    const checkName = db.get(req.body.name);
     if (!checkName) {
       db.set(name, {
         name: name,
@@ -79,7 +79,7 @@ module.exports.load = async function (app, db) {
       if (!req.body.oldPw || !req.body.newPw) {
         res.redirect("/edit");
       }
-      const dbName = await db.get(req.session.name);
+      const dbName = db.get(req.session.name);
       const saltHash = crypto.createHmac('sha256', dbName.salt);
       saltHash.update(req.body.oldPw);
       const pwHash = saltHash.digest('hex');
@@ -87,7 +87,15 @@ module.exports.load = async function (app, db) {
         const saltHash = crypto.createHmac('sha256', dbName.salt);
         saltHash.update(req.body.newPw);
         const pwHash = saltHash.digest('hex');
-        await db.set(`${req.session.name}.pw`, pwHash);
+        const name = req.session.name;
+        const token = dbName.token;
+        const pwSalt = dbName.salt;
+        db.set(name, {
+          name: name,
+          pw: pwHash,
+          salt: pwSalt,
+          token: token
+        });
         delete req.session.loggedIn;
         res.redirect("/login");
       } else {
