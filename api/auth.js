@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const config = require("../config");
 const generator = require("../modules/generator.js");
+const sanitize = require("../modules/sanitize");
 const crypto = require('crypto');
 
 module.exports.load = async function (app, db) {
@@ -13,7 +14,7 @@ module.exports.load = async function (app, db) {
     if (!req.body.pw) {
       res.redirect("/login");
     }
-    const name = req.body.name;
+    const name = await sanitize.clean(req.body.name);
     const dbName = db.get(name);
     if (!dbName || dbName == null || dbName == "null") {
       res.redirect("/login");
@@ -47,7 +48,10 @@ module.exports.load = async function (app, db) {
     if (!req.body.pw) {
       return res.redirect("/register");
     }
-    const name = req.body.name;
+    const name = await sanitize.clean(req.body.name);
+    if(name == "") {
+      return res.redirect("/register");
+    }
     // Password hash
     const pwSalt = generator.gen(16)
     const saltHash = crypto.createHmac('sha256', pwSalt);
@@ -55,7 +59,7 @@ module.exports.load = async function (app, db) {
     const pwHash = saltHash.digest('hex');
     // Generate token
     const token = generator.gen(32);
-    const checkName = db.get(req.body.name);
+    const checkName = db.get(name);
     if (!checkName) {
       db.set(name, {
         name: name,
@@ -79,7 +83,8 @@ module.exports.load = async function (app, db) {
       if (!req.body.oldPw || !req.body.newPw) {
         res.redirect("/edit");
       }
-      const dbName = db.get(req.session.name);
+      const name = await sanitize.clean(req.session.name);
+      const dbName = db.get(name);
       const saltHash = crypto.createHmac('sha256', dbName.salt);
       saltHash.update(req.body.oldPw);
       const pwHash = saltHash.digest('hex');
@@ -87,7 +92,6 @@ module.exports.load = async function (app, db) {
         const saltHash = crypto.createHmac('sha256', dbName.salt);
         saltHash.update(req.body.newPw);
         const pwHash = saltHash.digest('hex');
-        const name = req.session.name;
         const token = dbName.token;
         const pwSalt = dbName.salt;
         db.set(name, {

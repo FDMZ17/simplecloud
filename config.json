@@ -17,7 +17,7 @@
         "min_pw_length": 8,
         "max_pw_length": 64,
         "min_name_length": 4,
-        "max_name_length": 16
+        "max_name_length": 64
     },
     "upload": {
         "max_filesize": 100,
