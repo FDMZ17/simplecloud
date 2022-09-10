@@ -20,7 +20,7 @@ module.exports.load = async function (app, db) {
     <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${config.upload.max_filesize}MB</h2>
 		<form class="mt-10 space-y-8" action="/api/upload" method="POST" enctype="multipart/form-data">
         <input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-neutral-800 text-neutral-300" placeholder="File"
-					type="file" name="file" required />
+					type="file" name="file" required multiple />
 			<div>
 				<div class="flex flex-col justify-center md:flex-row md:items-center">
 					<input
@@ -30,8 +30,8 @@ module.exports.load = async function (app, db) {
 			</div>
 		</form>
 	</div>
+	<h2 class="absolute inset-x-0 bottom-0 px-16 mb-6 text-center text-white text-md">If the uploaded file extension is not in the file whitelist, the file will not be uploaded</h2>
 </body>
-
 </html>
 `);
 		} else {

@@ -69,7 +69,7 @@ module.exports = class EasyJsonDB {
         this.saveDataToFile();
     }
     pull(key, element) {
-        this.data[key].splice(this.data[key].indexOf(element));
+        this.data[key].splice(this.data[key].indexOf(element), 1);
         this.saveDataToFile();
     }
     clear() {
