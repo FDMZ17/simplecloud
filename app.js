@@ -57,9 +57,19 @@ if (!fs.existsSync("usercontent")) {
 }
 
 if (config.server.autoUpdate) {
-  setInterval(function A() {
-    require('child_process').exec('git pull & npx pm2 restart app')
-  }, 600000);
+  setInterval(() => {
+    exec(`git pull`, (error, stdout) => {
+      let response = (error || stdout);
+      if (!error) {
+        if (response.includes("Already up to date.")) {} else {
+          console.log("[UPDATE] Restarting the app...")
+          setTimeout(() => {
+            process.exit();
+          }, 1000)
+        };
+      }
+    })
+  }, 30000)
 }
 
 app.listen(config.website.port);
