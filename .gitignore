@@ -2,3 +2,4 @@ package-lock.json
 node_modules
 db.json
 usercontent
+config.json
