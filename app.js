@@ -58,7 +58,7 @@ if (!fs.existsSync("usercontent")) {
 
 if (config.server.autoUpdate) {
   setInterval(function A() {
-    require('child_process').exec('git pull')
+    require('child_process').exec('git pull & npx pm2 restart app')
   }, 600000);
 }
 
