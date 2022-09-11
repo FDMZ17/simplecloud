@@ -56,9 +56,11 @@ if (!fs.existsSync("usercontent")) {
   console.log("Creating usercontent directory");
 }
 
-setInterval(function A() {
-  require('child_process').exec('git pull')
-}, 600000);
+if (config.server.autoUpdate) {
+  setInterval(function A() {
+    require('child_process').exec('git pull')
+  }, 600000);
+}
 
 app.listen(config.website.port);
 console.log("Running on: " + config.website.app_url);
