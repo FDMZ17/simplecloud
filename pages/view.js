@@ -43,8 +43,8 @@ module.exports.load = async function (app, db, dirls) {
 	<div class="p-5 mx-auto mt-16 max-w-2xl rounded shadow-sm">
     <h2 class="px-4 text-4xl text-center text-white">File preview</h2>
     <div class="grid place-items-center">
-      <object data="/usercontent${req.path}" class="mt-14 w-auto max-w-full h-auto max-h-full text-center text-white bg-white full" width="100%" >
-        The requested data is not found!
+      <object data="/usercontent${req.path}" class="mt-8 w-auto max-w-full h-auto max-h-full text-center text-black bg-white" width="100%" >
+          This file does not have preview!  
       </object>
       <a target="_blank" class="inline-block px-4 py-2 mt-6 mr-5 mb-3 ml-5 text-base text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800" href="/usercontent${req.path}">Download</a>
     </div>
