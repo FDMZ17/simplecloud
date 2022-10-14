@@ -54,7 +54,7 @@ apiFiles.forEach(file => {
 
 if (!fs.existsSync("usercontent")) {
   fs.mkdirSync("usercontent");
-  console.log("Creating usercontent directory");
+  console.info("Creating usercontent directory");
 }
 
 if (config.server.autoUpdate) {
@@ -63,7 +63,7 @@ if (config.server.autoUpdate) {
       let response = (error || stdout);
       if (!error) {
         if (response.includes("Already up to date.")) {} else {
-          console.log("[UPDATE] Restarting the app...")
+          console.info("[UPDATE] Restarting the app...")
           setTimeout(() => {
             process.exit();
           }, 1000)
@@ -74,4 +74,4 @@ if (config.server.autoUpdate) {
 }
 
 app.listen(config.website.port);
-console.log("Running on: " + config.website.app_url);
+console.info("Running on: " + config.website.app_url);

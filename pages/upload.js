@@ -30,7 +30,7 @@ module.exports.load = async function (app, db) {
 			</div>
 		</form>
 	</div>
-	<h2 class="absolute inset-x-0 bottom-0 px-16 mb-6 text-center text-white text-md">If the uploaded file extension is not in the file whitelist, the file will not be uploaded</h2>
+	<h2 class="absolute inset-x-0 bottom-0 px-16 mb-6 text-center text-white text-md">If the uploaded file extension is not in the allowed list or the file is larger than max file size, the file will not be uploaded</h2>
 </body>
 </html>
 `);
