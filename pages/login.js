@@ -22,7 +22,7 @@ module.exports.load = async function (app) {
 
 			<div class="flex items-center">
 				<input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300" name="pw" placeholder="Password"
-					type="password" minlength="${config.auth.min_pw_length}" maxlength="${config.auth.max_pw_length}" pattern="[a-zA-Z0-9-]+" required />
+					type="password" minlength="${config.auth.min_pw_length}" maxlength="${config.auth.max_pw_length}" required />
 			</div>
 			<div>
 				<div class="flex flex-col justify-between md:flex-row md:items-center">
