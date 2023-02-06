@@ -1,22 +1,30 @@
 module.exports.load = async function (app, db) {
-    app.get("/dash", async (req, res) => {
-        if (req.session.loggedIn) {
-            const dbList = await db.get(`${req.session.name}files`);
-            let fileCount;
-            if (dbList) {
-                fileCount = dbList.length;
-            } else {
-                fileCount = 0;
-            }
+  app.get("/dash", async (req, res) => {
+    if (req.session.loggedIn) {
+      const dbList = await db.get(`${req.session.name}files`);
+      let fileCount;
+      if (dbList) {
+        fileCount = dbList.length;
+      } else {
+        fileCount = 0;
+      }
 
-            const uploadedSize = await db.get(`${req.session.name}size`);
-            let size;
-            if (uploadedSize) {
-                size = uploadedSize.toFixed(2);
-            } else {
-                size = 0;
-            }
-            res.send(`<!DOCTYPE html>
+      const uploadedSize = await db.get(`${req.session.name}size`);
+      let size;
+
+      if (uploadedSize) {
+        if (uploadedSize < 1) {
+          size = `${(uploadedSize * 1024).toFixed(2)} KB`;
+        } else if (uploadedSize >= 1 && uploadedSize < 1024) {
+          size = `${uploadedSize.toFixed(2)} MB`;
+        } else {
+          size = `${(uploadedSize / 1024).toFixed(2)} GB`;
+        }
+      } else {
+        size = 0;
+      }
+
+      res.send(`<!DOCTYPE html>
       <html lang="en">
       
       <head>
@@ -101,7 +109,7 @@ module.exports.load = async function (app, db) {
                                   <div class="flex flex-row items-center">
                                       <div class="flex-1 text-right md:text-center">
                                           <h5 class="font-bold text-gray-500 uppercase">Uploaded file</h5>
-                                          <h3 class="text-3xl font-bold">${size}MB</h3>
+                                          <h3 class="text-3xl font-bold">${size}</h3>
                                       </div>
                                   </div>
                               </div>
@@ -111,9 +119,9 @@ module.exports.load = async function (app, db) {
       </body>
       
       </html>`);
-            res.end();
-        } else {
-            res.redirect("/login");
-        }
-    });
+      res.end();
+    } else {
+      res.redirect("/login");
+    }
+  });
 };
