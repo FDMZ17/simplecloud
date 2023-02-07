@@ -1,4 +1,4 @@
-![License](https://img.shields.io/github/license/FDMZ17/simplecloud.svg?style=for-the-badge) [![Live demo](https://img.shields.io/website?label=Live%20preview&style=for-the-badge&url=https://simplecloud.fdmz17.eu.org/)](https://simplecloud.fdmz17.eu.org/) 
+![License](https://img.shields.io/github/license/FDMZ17/simplecloud.svg?style=for-the-badge) [![Live demo](https://img.shields.io/website?label=Live%20preview&style=for-the-badge&url=https://simplecloud.fdmz17.repl.co)](https://simplecloud.fdmz17.repl.co) 
 ![Repo Size](https://img.shields.io/github/languages/code-size/FDMZ17/simplecloud.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/FDMZ17/simplecloud.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/FDMZ17/simplecloud.svg?style=for-the-badge&social) ![Stars](https://img.shields.io/github/stars/FDMZ17/simplecloud.svg?style=for-the-badge)
     
 # SimpleCloud
