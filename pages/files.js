@@ -4,14 +4,15 @@ module.exports.load = async function (app, db) {
   app.get("/files", async (req, res) => {
     if (req.session.loggedIn) {
       const dbList = await db.get(`${req.session.name}files`);
+      console.log(dbList)
       let i = 0;
       let listFile = [];
       if (dbList) {
         while (i < dbList.length) {
           listFile.push(`<li> 
-            <a target="_blank" class="inline-block mt-8 mb-3 text-md hover:text-primary" href="${config.website.app_url}/${dbList[i]}">${dbList[i]}</a> 
-            <a target="_blank" href="${config.website.app_url}/${dbList[i]}" class="px-4 py-2 mt-8 ml-4 text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 text-md hover:text-sky-500 hover:text-sky hover:bg-neutral-800">View</a>
-            <a href="${config.website.app_url}/api/delete/${dbList[i]}" class="px-4 py-2 mt-8 ml-4 text-center text-white bg-red-500 rounded-lg border-2 border-red-500 text-md hover:text-red-500 hover:text-red hover:bg-neutral-800">Delete</a>
+            <a target="_blank" class="inline-block mt-8 mb-3 text-md hover:text-primary" href="${config.website.app_url}/${dbList[i].id}">${dbList[i].name} | ${dbList[i].id}</a> 
+            <a target="_blank" href="${config.website.app_url}/${dbList[i].id}" class="px-4 py-2 mt-8 ml-4 text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 text-md hover:text-sky-500 hover:text-sky hover:bg-neutral-800">View</a>
+            <a href="${config.website.app_url}/api/delete/${dbList[i].id}" class="px-4 py-2 mt-8 ml-4 text-center text-white bg-red-500 rounded-lg border-2 border-red-500 text-md hover:text-red-500 hover:text-red hover:bg-neutral-800">Delete</a>
           </li>`);
           i++;
         }

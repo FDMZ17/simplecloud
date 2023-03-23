@@ -1,9 +1,25 @@
 const config = require("../config");
 
 module.exports.load = async function (app, db) {
-	app.get("/upload", async (req, res) => {
-		if (req.session.loggedIn) {
-			res.send(`<!DOCTYPE html>
+  app.get("/upload", async (req, res) => {
+    let size;
+
+    if (config.upload.max_filesize) {
+      if (config.upload.max_filesize < 1) {
+        size = `${(config.upload.max_filesize * 1024).toFixed(2)} KB`;
+      } else if (
+        config.upload.max_filesize >= 1 &&
+        config.upload.max_filesize < 1024
+      ) {
+        size = `${config.upload.max_filesize.toFixed(2)} MB`;
+      } else {
+        size = `${(config.upload.max_filesize / 1024).toFixed(2)} GB`;
+      }
+    } else {
+      size = 0;
+    }
+    if (req.session.loggedIn) {
+      res.send(`<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,7 +33,7 @@ module.exports.load = async function (app, db) {
 <body class="bg-neutral-800">
 	<div class="p-5 mx-auto mt-16 max-w-md rounded shadow-sm">
     <h2 class="px-4 text-4xl text-center text-white">Upload file</h2>
-    <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${config.upload.max_filesize}MB</h2>
+    <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${size}</h2>
 		<form class="mt-10 space-y-8" action="/api/upload" method="POST" enctype="multipart/form-data">
         <input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-neutral-800 text-neutral-300" placeholder="File"
 					type="file" name="file" required multiple />
@@ -34,8 +50,8 @@ module.exports.load = async function (app, db) {
 </body>
 </html>
 `);
-		} else {
-			res.redirect("/login");
-		}
-	});
-}
+    } else {
+      res.redirect("/login");
+    }
+  });
+};
