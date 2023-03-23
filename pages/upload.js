@@ -36,7 +36,7 @@ module.exports.load = async function (app, db) {
     <h2 class="px-4 mt-8 text-xl text-center text-white">Max size: ${size}</h2>
 		<form class="mt-10 space-y-8" action="/api/upload" method="POST" enctype="multipart/form-data">
         <input class="px-4 w-full h-12 rounded border border-none focus:outline-none bg-neutral-800 text-neutral-300" placeholder="File"
-					type="file" name="file" required multiple />
+					type="file" name="file" required />
 			<div>
 				<div class="flex flex-col justify-center md:flex-row md:items-center">
 					<input

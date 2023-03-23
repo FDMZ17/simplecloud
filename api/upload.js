@@ -11,49 +11,25 @@ module.exports.load = async function (app, db) {
       return res.redirect("/upload");
     }
     const file = req.files.file;
-    if (file.length > 1) {
-      file.forEach((reqFile) => {
-        const fileExt = path.extname(reqFile.name);
-        if (config.upload.file_extention_check) {
-          if (!config.upload.allowed_extention.includes(fileExt)) {
-            return;
-          }
-        }
-        const rawID = generator.gen(config.upload.id_length);
-        const fID = rawID + fileExt;
-        const fileURL = config.website.app_url + "/" + fID;
-        reqFile.mv(`usercontent/${fID}`, (err) => {
-          if (err) {
-            return res.status(500).redirect("/");
-          }
-        });
-        const fileSize = (reqFile.size / 1024 / 1024).toFixed(2);
-        db.push(`${req.session.name}files`, { name: file.name, id: fID });
-        db.add(`${req.session.name}size`, Number(fileSize));
-        db.push(`${rawID}`, fileSize);
-      });
-      return res.redirect("/files");
-    } else if ((file.length = 1)) {
-      const fileExt = path.extname(file.name);
-      if (config.upload.file_extention_check) {
-        if (!config.upload.allowed_extention.includes(fileExt)) {
-          return res.redirect("/upload");
-        }
+    const fileExt = path.extname(file.name);
+    if (config.upload.file_extention_check) {
+      if (!config.upload.allowed_extention.includes(fileExt)) {
+        return res.redirect("/upload");
       }
-      const rawID = generator.gen(config.upload.id_length);
-      const fID = rawID + fileExt;
-      const fileURL = config.website.app_url + "/" + fID;
-      file.mv(`usercontent/${fID}`, (err) => {
-        if (err) {
-          return res.status(500).redirect("/");
-        }
-        return res.redirect(fileURL);
-      });
-      const fileSize = (file.size / 1024 / 1024).toFixed(2);
-      db.push(`${req.session.name}files`, { name: file.name, id: fID });
-      db.add(`${req.session.name}size`, Number(fileSize));
-      db.push(`${rawID}`, fileSize);
     }
+    const rawID = generator.gen(config.upload.id_length);
+    const fID = rawID + fileExt;
+    const fileURL = config.website.app_url + "/" + fID;
+    file.mv(`usercontent/${fID}`, (err) => {
+      if (err) {
+        return res.status(500).redirect("/");
+      }
+      return res.redirect(fileURL);
+    });
+    const fileSize = (file.size / 1024 / 1024).toFixed(2);
+    db.push(`${req.session.name}files`, { name: file.name, id: fID });
+    db.add(`${req.session.name}size`, Number(fileSize));
+    db.push(`${rawID}`, fileSize);
   });
 
   app.post("/upload/curl", async (req, res) => {
