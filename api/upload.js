@@ -24,7 +24,7 @@ module.exports.load = async function (app, db) {
       if (err) {
         return res.status(500).redirect("/");
       }
-      return res.redirect(fileURL);
+      return res.send({ url: fileURL});
     });
     const fileSize = (file.size / 1024 / 1024).toFixed(2);
     db.push(`${req.session.name}files`, { name: file.name, id: fID });

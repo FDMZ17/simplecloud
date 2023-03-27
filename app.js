@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const session = require('express-session');
 const app = express();
 const Database = require("./modules/db");
@@ -11,7 +12,7 @@ const date_time = new Date();
 const exec = require('child_process').exec;
 
 app.set('trust proxy', 1);
-
+app.use(cors());
 app.use(express.static(__dirname + "/public"));
 
 app.use(fileUpload({
