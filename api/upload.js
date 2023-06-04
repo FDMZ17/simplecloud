@@ -8,7 +8,7 @@ module.exports.load = async function (app, db) {
       return res.redirect("/login");
     }
     if (res.files == 0) {
-      return res.redirect("/upload");
+      return res.redirect("/upload?error=nofile");
     }
     const file = req.files.file;
     const fileExt = path.extname(file.name);
@@ -65,8 +65,8 @@ module.exports.load = async function (app, db) {
       return res.send(`${fileURL}\n`);
     });
     const fileSize = (file.size / 1024 / 1024).toFixed(2);
-    db.push(`${req.session.name}files`, { name: file.name, id: fID });
-    db.add(`${req.session.name}size`, Number(fileSize));
+    db.push(`${req.body.name}files`, { name: file.name, id: fID });
+    db.add(`${req.body.name}size`, Number(fileSize));
     db.push(`${rawID}`, fileSize);
   });
 };
