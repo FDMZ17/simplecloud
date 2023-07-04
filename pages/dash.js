@@ -44,8 +44,10 @@ module.exports.load = async function (app, db) {
                               <a class="flex items-center px-2 py-5 text-gray-700 hover:text-gray-900" href="#">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                       viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;">
-                                      <path style="fill:#E8F4FC;" d="M426.667,256c0-94.257-76.41-170.667-170.667-170.667S85.333,161.743,85.333,256 C38.206,256,0,294.206,0,341.333s38.206,85.333,85.333,85.333h341.333c47.128,0,85.333-38.206,85.333-85.333 S473.794,256,426.667,256z" />
-                                      <path style="fill:#D1E5F5;" d="M426.667,256c0-94.257-76.41-170.667-170.667-170.667v341.333h170.667 c47.128,0,85.333-38.206,85.333-85.333S473.794,256,426.667,256z" />
+                                      <path style="fill:#E8F4FC;"
+                                          d="M426.667,256c0-94.257-76.41-170.667-170.667-170.667S85.333,161.743,85.333,256 C38.206,256,0,294.206,0,341.333s38.206,85.333,85.333,85.333h341.333c47.128,0,85.333-38.206,85.333-85.333 S473.794,256,426.667,256z" />
+                                      <path style="fill:#D1E5F5;"
+                                          d="M426.667,256c0-94.257-76.41-170.667-170.667-170.667v341.333h170.667 c47.128,0,85.333-38.206,85.333-85.333S473.794,256,426.667,256z" />
                                   </svg>
                                   <span class="ml-8 text-white hover:font-bold">SimpleCloud</span>
                               </a>
@@ -74,7 +76,7 @@ module.exports.load = async function (app, db) {
                   <div class="hidden mobile-menu md:hidden">
                       <a href="/upload" class="block px-4 py-4 text-sm text-center text-white">Upload</a>
                       <a href="/files" class="block px-4 py-4 text-sm text-center text-white">Files</a>
-                      <a href="/edit" class="block px-4 py-4 text-sm text-center text-white">Edit</a>   
+                      <a href="/edit" class="block px-4 py-4 text-sm text-center text-white">Edit</a>
                       <a href="/cli" class="block px-4 py-4 text-sm text-center text-white">CLI</a>
                       <a href="/logout" class="block px-4 py-4 text-sm text-center text-white">Logout</a>
                   </div>
@@ -115,7 +117,10 @@ module.exports.load = async function (app, db) {
                               </div>
                           </div>
                       </div>
-                      <script src="/elements/script.js"></script>
+                      <script src="/elements/dropdown.js"></script>
+                  </div>
+              </div>
+          </div>
       </body>
       
       </html>`);

@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js & tailwindcss -i src/tailwind-raw.css -o public/elements/style.css --watch",
-    "build": "tailwindcss -i src/tailwind-raw.css -o public/elements/style.css --minify",
+    "dev": "nodemon app.js & tailwindcss -i src/source.css -o public/elements/style.css --watch",
+    "build": "tailwindcss -i src/source.css -o public/elements/style.css --minify",
     "start": "pm2 start app.js"
   },
   "repository": {
