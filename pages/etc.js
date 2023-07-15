@@ -1,7 +1,7 @@
 const config = require("../config");
 
 module.exports.load = async function (app) {
-  app.get("/cli", async (req, res) => {
+  app.get("/etc", async (req, res) => {
     if (req.session.loggedIn) {
       res.send(`<!DOCTYPE html>
       <html lang="en">
@@ -10,7 +10,7 @@ module.exports.load = async function (app) {
           <meta charset="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Simple cloud | CLI</title>
+          <title>Simple cloud | Etc</title>
           <link href="/elements/style.css" rel="stylesheet" />
       </head>
       
@@ -19,7 +19,7 @@ module.exports.load = async function (app) {
               <div class="px-8 mx-auto max-w-6xl">
                   <div class="flex justify-between">
                       <div class="flex space-x-4">
-                          <a class="flex items-center px-2 py-5 text-gray-700 hover:text-gray-900" href="#">
+                          <a class="flex items-center px-2 py-5 text-gray-700 hover:text-gray-900" href="/dash">
                               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                   viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;">
                                   <path style="fill:#E8F4FC;"
@@ -33,7 +33,7 @@ module.exports.load = async function (app) {
                               <a class="px-2 py-5 text-white hover:font-bold" href="/upload">Upload</a>
                               <a class="px-2 py-5 text-white hover:font-bold" href="/files">Files</a>
                               <a class="px-2 py-5 text-white hover:font-bold" href="/edit">Edit</a>
-                              <a class="px-2 py-5 text-white hover:font-bold" href="/cli">CLI</a>
+                              <a class="px-2 py-5 text-white hover:font-bold" href="/etc">etc</a>
                           </div>
                       </div>
                       <div class="hidden items-center space-x-1 md:flex">
@@ -55,7 +55,7 @@ module.exports.load = async function (app) {
                   <a href="/upload" class="block px-4 py-4 text-sm text-center text-white">Upload</a>
                   <a href="/files" class="block px-4 py-4 text-sm text-center text-white">Files</a>
                   <a href="/edit" class="block px-4 py-4 text-sm text-center text-white">Edit</a>
-                  <a href="/cli" class="block px-4 py-4 text-sm text-center text-white">CLI</a>
+                  <a href="/cli" class="block px-4 py-4 text-sm text-center text-white">Etc</a>
                   <a href="/logout" class="block px-4 py-4 text-sm text-center text-white">Logout</a>
               </div>
           </nav>
@@ -66,12 +66,25 @@ module.exports.load = async function (app) {
                       class="px-4 mt-10 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300"
                       value='curl -F "file=@yourfile.png" -F "token=${req.session.token}" -F "name=${req.session.name}" ${config.website.app_url}/upload/curl'
                       readonly>
-                  <button
+                      <button
                       class="inline-block px-4 py-2 mt-6 mr-5 mb-3 ml-5 text-base text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800"
-                      onclick="copyUrl()">Copy</button>
+                      onclick="copyCMD()">Copy</button>
               </div>
           </div>
-          <script src="/elements/script.js"></script>
+          <div class="p-5 mx-auto mt-4 max-w-2xl rounded shadow-sm mb-8">
+              <h2 class="px-4 text-4xl text-center text-white">Your token: </h2>
+              <div class="flex flex-wrap justify-center items-center w-full">
+                  <input type="text" id="token"
+                      class="px-4 mt-10 w-full h-12 rounded border border-none focus:outline-none bg-stone-900 text-neutral-300"
+                      value='${req.session.token}'
+                      readonly>
+                      <button
+                      class="inline-block px-4 py-2 mt-6 mr-5 mb-3 ml-5 text-base text-center text-white bg-sky-500 rounded-lg border-2 border-sky-500 hover:text-sky-500 hover:text-sky hover:bg-neutral-800"
+                      onclick="copyToken()">Copy</button>
+              </div>
+          </div>
+          <h2 class="absolute inset-x-0 bottom-0 px-16 mb-6 text-center text-white text-md">Dev tips: The token can be used to reset passwords, so store the tokens in a safe place.</h2>
+          <script src="/elements/etc.js"></script>
           <script src="/elements/dropdown.js"></script>
       </body>
       

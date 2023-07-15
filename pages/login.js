@@ -33,6 +33,11 @@ module.exports.load = async function (app) {
 						Don't have an account yet? Register
 					</a>
 				</div>
+				<div class="flex flex-col justify-between md:flex-row md:items-center ml-64">
+				<a class="self-center mt-4 text-sm text-gray-400 underline md:self-auto md:mt-0" href="/forgot">
+					Forgot your password?
+				</a>
+			</div>
 			</div>
 		</form>
 	</div>

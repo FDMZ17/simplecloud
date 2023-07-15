@@ -41,7 +41,7 @@ module.exports.load = async function (app, db) {
                   <div class="px-8 mx-auto max-w-6xl">
                       <div class="flex justify-between">
                           <div class="flex space-x-4">
-                              <a class="flex items-center px-2 py-5 text-gray-700 hover:text-gray-900" href="#">
+                              <a class="flex items-center px-2 py-5 text-gray-700 hover:text-gray-900" href="/dash">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                       viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;">
                                       <path style="fill:#E8F4FC;"
@@ -55,7 +55,7 @@ module.exports.load = async function (app, db) {
                                   <a class="px-2 py-5 text-white hover:font-bold" href="/upload">Upload</a>
                                   <a class="px-2 py-5 text-white hover:font-bold" href="/files">Files</a>
                                   <a class="px-2 py-5 text-white hover:font-bold" href="/edit">Edit</a>
-                                  <a class="px-2 py-5 text-white hover:font-bold" href="/cli">CLI</a>
+                                  <a class="px-2 py-5 text-white hover:font-bold" href="/etc">Etc</a>
                               </div>
                           </div>
                           <div class="hidden items-center space-x-1 md:flex">
@@ -77,7 +77,7 @@ module.exports.load = async function (app, db) {
                       <a href="/upload" class="block px-4 py-4 text-sm text-center text-white">Upload</a>
                       <a href="/files" class="block px-4 py-4 text-sm text-center text-white">Files</a>
                       <a href="/edit" class="block px-4 py-4 text-sm text-center text-white">Edit</a>
-                      <a href="/cli" class="block px-4 py-4 text-sm text-center text-white">CLI</a>
+                      <a href="/etc" class="block px-4 py-4 text-sm text-center text-white">Etc</a>
                       <a href="/logout" class="block px-4 py-4 text-sm text-center text-white">Logout</a>
                   </div>
               </nav>

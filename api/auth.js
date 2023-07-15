@@ -9,15 +9,15 @@ module.exports.load = async function (app, db) {
     extended: true
   }), async (req, res) => {
     if (!req.body.name) {
-      res.redirect("/login");
+      return res.redirect("/login");
     }
     if (!req.body.pw) {
-      res.redirect("/login");
+      return res.redirect("/login");
     }
     const name = await sanitize.clean(req.body.name);
     const dbName = db.get(name);
     if (!dbName || dbName == null || dbName == "null") {
-      res.redirect("/login");
+      return res.redirect("/login");
     } else {
       let saltHash = crypto.createHmac('sha256', dbName.salt);
       saltHash.update(req.body.pw);
@@ -49,7 +49,7 @@ module.exports.load = async function (app, db) {
       return res.redirect("/register");
     }
     const name = await sanitize.clean(req.body.name);
-    if(name == "") {
+    if (name == "") {
       return res.redirect("/register");
     }
     // Password hash
@@ -73,7 +73,7 @@ module.exports.load = async function (app, db) {
       req.session.token = token;
       res.redirect("/dash");
     } else {
-      res.status(401).redirect("/login")
+      return res.status(401).redirect("/login")
     }
   });
   app.post('/api/password', bodyParser.urlencoded({
@@ -81,7 +81,7 @@ module.exports.load = async function (app, db) {
   }), async (req, res) => {
     if (req.session.loggedIn) {
       if (!req.body.oldPw || !req.body.newPw) {
-        res.redirect("/edit");
+        return res.redirect("/edit");
       }
       const name = await sanitize.clean(req.session.name);
       const dbName = db.get(name);
@@ -101,10 +101,43 @@ module.exports.load = async function (app, db) {
           token: token
         });
         delete req.session.loggedIn;
-        res.redirect("/login");
+        return res.redirect("/login");
       } else {
-        res.redirect("/login");
+        return res.redirect("/login");
       }
     }
   });
+  app.post('/api/auth/forgot', bodyParser.urlencoded({
+    extended: true
+  }), async (req, res) => {
+    if (!req.body.token || !req.body.fileID || !req.body.name || !req.body.pw) {
+      return res.redirect("/forgot")
+    }
+
+    const dbName = await db.get(req.body.name);
+    if (!dbName || dbName == null || dbName == "null") {
+      return res.redirect("/login");
+    }
+
+    if (req.body.token != dbName.token) {
+      return res.redirect('/forgot');
+    }
+
+    const userFiles = await db.get(`${req.body.name}files`);
+    if (!userFiles.map(file => file.id).includes(req.body.fileID)) {
+      return res.redirect('/forgot');
+    }
+    const newSalt = generator.gen(16)
+    const token = generator.gen(32);
+    db.set(req.body.name, {
+      name: req.body.name,
+      pw: req.body.pw,
+      salt: newSalt,
+      token: token
+    });
+    req.session.loggedIn = true;
+    req.session.name = req.body.name;
+    req.session.token = token;
+    return res.redirect('/dash')
+  })
 }
