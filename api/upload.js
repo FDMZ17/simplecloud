@@ -1,6 +1,7 @@
 const config = require("../config");
 const generator = require("../modules/generator.js");
 const path = require("path");
+const mime = require('mime');
 
 module.exports.load = async function (app, db) {
   app.post("/api/upload", async (req, res) => {
@@ -13,8 +14,11 @@ module.exports.load = async function (app, db) {
     const file = req.files.file;
     const fileExt = path.extname(file.name);
     if (config.upload.file_extention_check) {
-      if (!config.upload.allowed_extention.includes(fileExt)) {
-        return res.redirect("/upload");
+      const mimeType = mime.getType(fileExt);
+      if (!config.upload.allowed_mime.includes(mimeType)) {
+        return res
+          .status(422)
+          .send("File extention not allowed");
       }
     }
     const rawID = generator.gen(config.upload.id_length);
@@ -27,9 +31,10 @@ module.exports.load = async function (app, db) {
       return res.send({ url: fileURL});
     });
     const fileSize = (file.size / 1024 / 1024).toFixed(2);
-    db.push(`${req.session.name}files`, { name: file.name, id: fID });
+    const unixTimeStamp = Math.floor(Date.now() / 1000);
+    db.push(`${req.session.name}files`, { name: file.name, id: fID, timeStamp: unixTimeStamp });
     db.add(`${req.session.name}size`, Number(fileSize));
-    db.push(`${rawID}`, fileSize);
+    db.set(`${rawID}`, { size: fileSize, timeStamp: unixTimeStamp });
   });
 
   app.post("/upload/curl", async (req, res) => {
@@ -49,7 +54,7 @@ module.exports.load = async function (app, db) {
     const file = req.files.file;
     const fileExt = path.extname(file.name);
     if (config.upload.file_extention_check) {
-      if (!config.upload.allowed_extention.includes(fileExt)) {
+      if (!config.upload.allowed_mime.includes(mime.getType(fileExt))) {
         return res
           .status(422)
           .send("Files with this extension are not allowed");
@@ -65,8 +70,9 @@ module.exports.load = async function (app, db) {
       return res.send(`${fileURL}\n`);
     });
     const fileSize = (file.size / 1024 / 1024).toFixed(2);
-    db.push(`${req.body.name}files`, { name: file.name, id: fID });
+    const unixTimeStamp = Math.floor(Date.now() / 1000);
+    db.push(`${req.body.name}files`, { name: file.name, id: fID, timeStamp: unixTimeStamp });
     db.add(`${req.body.name}size`, Number(fileSize));
-    db.push(`${rawID}`, fileSize);
+    db.push(`${rawID}`, { size: fileSize, timeStamp: unixTimeStamp });
   });
 };

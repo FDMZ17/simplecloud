@@ -2,7 +2,7 @@ const config = require("../config");
 
 module.exports.load = async function (app) {
 	app.get("/login", async (req, res) => {
-		res.send(`<!DOCTYPE html>
+		return res.send(`<!DOCTYPE html>
 <html lang="en">
 
 <head>

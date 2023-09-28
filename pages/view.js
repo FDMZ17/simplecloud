@@ -13,7 +13,7 @@ module.exports.load = async function (app, db, dirls) {
     if (!dbChk) {
       return res.sendStatus(404);
     }
-    const fileSize = dbChk;
+    const fileSize = dbChk.size;
     let motd;
     const motdArray = config.website.embed_motd;
     if(config.website.random_embed_motd === true) {
@@ -52,6 +52,13 @@ module.exports.load = async function (app, db, dirls) {
 </body>
 <footer>
 <h2 class="px-4 text-lg text-center text-white">Size: ${fileSize} MB</h2>
+<h2 class="px-4 text-lg text-center text-white" id="upload-timestamp"></h2>
+<script>
+const unixtimestamp = "${dbChk.timeStamp}";
+const date = new Date(unixtimestamp * 1000);
+const upload_timestamp_html = document.querySelector("#upload-timestamp");
+upload_timestamp_html.innerText = "Uploaded at: " + date.toLocaleTimeString("default")
+</script> 
 </footer>
 </html>`);
     res.end();
