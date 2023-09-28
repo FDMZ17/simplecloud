@@ -33,7 +33,7 @@ module.exports.load = async function (app) {
 						class="px-4 py-2 text-sm text-white uppercase bg-sky-500 rounded cursor-pointer active:bg-gray-700 font-regular"
 						type="submit" value="register now" />
 					<a class="self-center mt-4 text-sm text-gray-400 underline md:self-auto md:mt-0" href="/login">
-						Alredy have an account? Login
+						Already have an account? Login
 					</a>
 				</div>
 			</div>
@@ -71,7 +71,7 @@ module.exports.load = async function (app) {
 						class="px-4 py-2 text-sm text-white uppercase bg-sky-500 rounded cursor-pointer active:bg-gray-700 font-regular"
 						type="submit" value="register now" />
 					<a class="self-center mt-4 text-sm text-gray-400 underline md:self-auto md:mt-0" href="/login">
-						Alredy have an account? Login
+						Already have an account? Login
 					</a>
 				</div>
 			</div>
